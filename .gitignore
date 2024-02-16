@@ -92,7 +92,7 @@ out
 dist
 
 # public folder in gitignore7
-# public
+public
 
 # Gatsby files
 .cache/

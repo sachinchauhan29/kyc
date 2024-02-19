@@ -11,6 +11,11 @@
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-3d"></script> -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
 
   <div class="app-page-title">
     <div class="page-title-wrapper">
@@ -138,7 +143,7 @@
               <h6><b>TREND REGION WISE DETAILS</b></h6>
             </div>
 
-            <div class="col-lg-3 col-12 text-right">
+            <div class="col-lg-4 col-12 text-right">
               <button class="btn-shadow btn btn-primary custom-btn btn-lg" data-toggle="collapse" data-target="#demo2">
                 <i class="fas fa-filter mr-2"></i>Filter
               </button>
@@ -202,7 +207,7 @@
 
         <div class="row">
           <div class="col-10 mx-auto">
-            <canvas width="200px" height="90px" id="acquisitions1"> </canvas>
+            <canvas width="400" height="330" id="acquisitions1"> </canvas>
           </div>
         </div>
       </div>
@@ -216,7 +221,7 @@
               <h6><b>Tenure wise details</b></h6>
             </div>
 
-            <div class="col-lg-3 col-lg-3 col-12 text-right">
+            <div class="col-lg-4 col-12 text-right">
               <button class="btn-shadow btn btn-primary custom-btn btn-lg" data-toggle="collapse" data-target="#demo">
                 <i class="fas fa-filter mr-2"></i>Filter
               </button>
@@ -269,7 +274,7 @@
 
         <div class="row">
           <div class="col-10 mx-auto">
-            <canvas width="200px" height="90px" id="acquisitions2"> </canvas>
+            <canvas id="acquisitions2" width="400" height="300"></canvas>
           </div>
         </div>
       </div>
@@ -294,13 +299,23 @@
       <div id="demo1" class="collapse">
         <form action="">
           <div class="row">
-            <div class="col-6">
+            <div class="col-4">
+              <label for="selectedRegion" class="mr-sm-2">Select Region</label>
+              <select class="form-control" id="selectedRegion">
+                <option value="Region">Region</option>
+                <option value="Region">North</option>
+                <option value="Region">EAST</option>
+                <option value="Region">WEST</option>
+                <option value="Region">SOUTH</option>
+              </select>
+            </div>
+            <div class="col-4">
               <label for="FROM" class="mr-sm-2">FROM</label>
 
               <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
                 value="<%=QueryData.fromDate %>" />
             </div>
-            <div class="col-6">
+            <div class="col-4">
               <label for="TO" class="mr-sm-2">TO</label>
 
               <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
@@ -320,64 +335,42 @@
 
     <div class="row">
       <div class="col-12 mx-auto d-flex justify-content-center">
-        <canvas id="acquisitions" width="200px" height="80px"></canvas>
+        <div id="myChart" style="width:100%; max-width:600px; height:500px;">
+        </div>
       </div>
     </div>
   </div>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 
   <script>
-    (async function () {
-      const data = {
-        labels: [
-          "Total DSR attendance",
-          "Total face matched",
-          "Total face not matched",
-          "Total out of time",
-        ],
-        datasets: [
-          {
-            label: "KYC INFO",
-            data: [
-              "<%= total %>",
-              "<%= absent %>",
-              "<%= present %>",
-              "<%= present %>",
-            ],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-              "rgb(86, 205, 86)",
-            ],
-            hoverOffset: 4,
-          },
-        ],
-      };
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-      const ctx = document.getElementById("acquisitions").getContext("2d");
-      new Chart(ctx, {
-        type: "pie",
-        data: data,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              display: true,
-              align: "start",
-              //position: "left",
-              labels: {
-                font: { size: 14 },
-                padding: 10,
-              },
-            },
-          },
-        },
-      });
-    })();
+    function drawChart() {
+
+      // Set Data
+      const data = google.visualization.arrayToDataTable([
+        ['Country', 'Mhl'],
+        ['Total DSR attendance', 54.8],
+        ['Total face matched', 48.6],
+        ['Total face not matched', 44.4],
+        ['Total out of time', 23.9],
+      ]);
+      const options = {
+        is3D: true
+      };
+      // Draw
+      const chart = new google.visualization.PieChart(document.getElementById('myChart'));
+      chart.draw(data, options);
+
+    }
   </script>
 
   <script>
     (async function () {
+      Chart.register(ChartDataLabels);
       const data = [
         { category: "Total KYC", count: 100 },
         { category: "Total KYC Success", count: 80 },
@@ -418,12 +411,22 @@
             legend: {
               display: false,
             },
+            datalabels: {
+              anchor: "end",
+              align: "top",
+              color: "#000",
+              formatter: (value) => {
+                return value;
+              },
+              font: {
+                weight: "bold",
+              },
+            },
           },
         },
       });
     })();
   </script>
-
   <script>
     (async function () {
       const data = [
@@ -431,38 +434,43 @@
         { category: "1-2 YEAR", count: 120 },
         { category: ">2 YEAR", count: 220 },
       ];
-
       const ctx = document.getElementById("acquisitions2").getContext("2d");
+      Chart.register(ChartDataLabels);
       new Chart(ctx, {
         type: "bar",
         data: {
           labels: data.map((a) => a.category),
           datasets: [
             {
-              label: "Counts",
-              data: data.map((row) => row.count),
+              label: "value ",
+              data: data.map((a) => a.count),
               backgroundColor: ["grey", "pink", "orange"],
+              // borderWidth: 1,
+              // borderRadius: 8,
             },
           ],
         },
         options: {
+          maintainAspectRatio: false,
           responsive: true,
           scales: {
             y: {
               beginAtZero: true,
-              stacked: true,
             },
           },
           plugins: {
-            title: {
-              display: true,
-              text: "",
-              font: {
-                size: 16,
-              },
-            },
             legend: {
               display: false,
+            },
+            datalabels: {
+              anchor: "end",
+              align: "top",
+              color: "#000",
+              formatter: Math.round,
+              font: {
+                weight: "600",
+                size: 10,
+              },
             },
           },
         },

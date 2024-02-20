@@ -374,19 +374,19 @@
                             </table>
 
                             <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
-                                <a href="/data-whitelisting?page=<%= currentPage - 1 %>"
+                                <a href="/retailerwhitelisting?page=<%= currentPage - 1 %>"
                                     class="paginate_button previous <%= startPage === 1 ? 'disabled' : '' %>"
                                     aria-controls="example" data-dt-idx="0" tabindex="-1"
                                     id="example_previous">Previous</a>
                                 <span>
                                     <% for (let i=startPage; i <=endPage; i++) { %>
-                                        <a href="/data-whitelisting?page=<%=i%>" class="paginate_button current"
+                                        <a href="/retailerwhitelisting?page=<%=i%>" class="paginate_button current"
                                             aria-controls="example" data-dt-idx="<%=i %>" tabindex="0">
                                             <%= i %>
                                         </a>
                                         <% } %>
                                 </span>
-                                <a href="/data-whitelisting?page=<%= (parseInt(currentPage) + 1) %>"
+                                <a href="/retailerwhitelisting?page=<%= (parseInt(currentPage) + 1) %>"
                                     class="paginate_button next <%= endPage === totalRows ? 'disabled' : '' %>"
                                     aria-controls="example" id="example_next">Next</a>
                             </div>

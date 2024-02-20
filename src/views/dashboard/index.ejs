@@ -150,7 +150,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="card-body">
+        <div class="card-body">
           <div id="demo2" class="collapse">
             <form action="">
               <div class="row">
@@ -203,7 +203,7 @@
               </div>
             </form>
           </div>
-        </div> -->
+        </div>
 
         <div class="row">
           <div class="col-10 mx-auto">
@@ -335,37 +335,72 @@
 
     <div class="row">
       <div class="col-12 mx-auto d-flex justify-content-center">
-        <div id="myChart" style="width:100%; max-width:600px; height:500px;">
-        </div>
+        <canvas id="acquisitions" width="200px" height="80px"></canvas>
       </div>
     </div>
+  </div>
   </div>
   <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 
 
   <script>
-    google.charts.load('current', { 'packages': ['corechart'] });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-      // Set Data
-      const data = google.visualization.arrayToDataTable([
-        ['Country', 'Mhl'],
-        ['Total DSR attendance', 54.8],
-        ['Total face matched', 48.6],
-        ['Total face not matched', 44.4],
-        ['Total out of time', 23.9],
-      ]);
-      const options = {
-        is3D: true
+    (async function () {
+      Chart.register(ChartDataLabels);
+      const data = {
+        labels: [
+          "Total DSR attendance",
+          "Total face matched",
+          "Total face not matched",
+          "Total out of time",
+        ],
+        datasets: [
+          {
+            label: "KYC INFO",
+            data: [
+              "10",
+              "50",
+              "40",
+              "10",
+            ],
+            backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+              "rgb(86, 205, 86)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
       };
-      // Draw
-      const chart = new google.visualization.PieChart(document.getElementById('myChart'));
-      chart.draw(data, options);
 
-    }
+      const ctx = document.getElementById("acquisitions").getContext("2d");
+      new Chart(ctx, {
+        type: "pie",
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true,
+              align: "start",
+              //position: "left",
+              labels: {
+                font: { size: 14 },
+                padding: 10,
+                // color: "red",
+              },
+            },
+            datalabels: {
+              color: "black",
+              font: {
+                weight: "bold",
+              },
+            },
+          },
+        },
+      });
+    })();
   </script>
 
   <script>

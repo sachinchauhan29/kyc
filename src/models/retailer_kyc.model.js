@@ -4,7 +4,7 @@ const dbCon = require('../config/db');
 
 const getretailerkyc = async(data)=>{
     
-    let query = "SELECT * FROM retailer_kyc WHERE 1=1 ";
+    let query = "SELECT * FROM retailerkyc_details WHERE 1=1 ";
     // if(data.Mobile) {
     //   query += ` AND distributor_kyc.mobile_no = '${data.Mobile}'`;
     // }
@@ -16,7 +16,7 @@ const getretailerkyc = async(data)=>{
     //     query+=`AND distributor_kyc.create_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
     // }
 
-   console.log(query);
+  //  console.log(query);
 
   return new Promise((resolve, reject) => {
     dbCon.query(query, (error, result) => {

@@ -2,21 +2,20 @@ const dbCon = require('../config/db');
 
 
 
-const getfilterDistrubutorkyc = async(data)=>{
-    
-    let query = "SELECT * FROM distributor_kyc WHERE 1=1 ";
-    if(data.Mobile) {
-      query += ` AND distributor_kyc.mobile_no = '${data.Mobile}'`;
-    }
-    if(data.email) {
-      query += ` AND distributor_kyc.email_id = '${data.email}'`;
-    }
-    if(data.toDate && data.fromDate)
-    {
-        query+=`AND distributor_kyc.create_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
-    }
+const getfilterDistrubutorkyc = async (data) => {
 
-   console.log(query);
+  let query = "SELECT * FROM distributor_details WHERE 1=1 ";
+  if (data.mobileno) {
+    query += ` AND distributor_details.mobileno = '${data.mobileno}'`;
+  }
+  if (data.email) {
+    query += ` AND distributor_details.email = '${data.email}'`;
+  }
+  if (data.toDate && data.fromDate) {
+    query += `AND distributor_details.created_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
+  }
+
+  // console.log(query);
 
   return new Promise((resolve, reject) => {
     dbCon.query(query, (error, result) => {
@@ -47,4 +46,4 @@ const getfilterDistrubutorkyc = async(data)=>{
 
 
 
-module.exports = {getfilterDistrubutorkyc}
+module.exports = { getfilterDistrubutorkyc }

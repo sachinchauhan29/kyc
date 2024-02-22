@@ -91,79 +91,58 @@
                             <form action="./payout">
                                 <div class="row">
                                     <div class="col-2">
-                                        <label for="Mobile" class="mr-sm-2">Mobile Number</label>
+                                        <label for="Mobile" class="mr-sm-2">SO Name</label>
                                         <input type="tel" maxlength="10" class="form-control" id="mobile_no"
-                                            placeholder="Mobile" name="Mobile" value="<%=QueryData.Mobile %>">
+                                            placeholder="SO Name" name="Mobile" value="<%=QueryData.Mobile %>">
                                     </div>
                                     <div class="col-2">
-                                        <label for="salesman_id" class="mr-sm-2">DSR ID</label>
-                                        <input type="text" class="form-control" id="awsm_code" placeholder="dsr_id"
+                                        <label for="salesman_id" class="mr-sm-2">DSR Code </label>
+                                        <input type="text" class="form-control" id="awsm_code" placeholder="DSR Code"
                                             name="salesman_id" value="<%=QueryData.salesman_id %>">
                                     </div>
                                     <div class="col-2">
-                                        <label for="salesman_name" class="mr-sm-2">DSR NAME</label>
-                                        <input type="text" class="form-control" id="awsm_name" placeholder="dsr_name"
+                                        <label for="salesman_name" class="mr-sm-2">DSR Name </label>
+                                        <input type="text" class="form-control" id="awsm_name" placeholder="DSR Name"
                                             name="salesman_name" value="<%=QueryData.salesman_name %>">
                                     </div>
-                                    <div class="col-2">
 
-                                        <div class="ms-auto">
-
-                                            <label for="salesman_type">SELECT DSR TYPE</label>
-
-                                            <select name="salesman_type" class="form-control" id="salesman_type"
-                                                placeholder="salesman_type" value="<%=QueryData.salesman_type %>">
-
-                                                <option value=""> DSR Type </option>
-                                                <option value="Awsm" <%=QueryData.salesman_type==='Awsm' ? 'selected'
-                                                    : '' %>>DSR</option>
-                                                <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
-                                                    %>>SDA</option>
-                                                <option value="Psm" <%=QueryData.salesman_type==='Psm' ? 'selected' : ''
-                                                    %>>PSM</option>>
-
-                                            </select>
-
-                                        </div>
-
-                                    </div>
 
                                     <div class="col-2">
 
-                                        <label for="AW-ID" class="mr-sm-2">Distributor ID</label>
+                                        <label for="AW-ID" class="mr-sm-2">Distributor Name </label>
 
                                         <input type="text" class="form-control" id="aw_code"
-                                            placeholder="distributor_id" name="aw_code" value="<%=QueryData.aw_code %>">
-
+                                            placeholder="Distributor Name" name="aw_code"
+                                            value="<%=QueryData.aw_code %>">
                                     </div>
 
                                     <div class="col-2">
-
-                                        <label for="AW-NAME" class="mr-sm-2">Distributor NAME</label>
-
+                                        <label for="AW-NAME" class="mr-sm-2">Distributor Code </label>
                                         <input type="text" class="form-control" id="aw_name"
-                                            placeholder="distributor_name" name="aw_name"
+                                            placeholder="Distributor Code" name="aw_name"
                                             value="<%=QueryData.aw_name %>">
 
                                     </div>
 
 
 
-                                    <div class="col-2 mt-2">
+                                    <div class="col-2 ">
 
-                                        <label for="ASE-CODE" class="mr-sm-2">SO CODE</label>
+                                        <label for="ASE-CODE" class="mr-sm-2">Salary Payout </label>
 
-                                        <input type="text" class="form-control" id="ase_code" placeholder="so_code"
-                                            name="ase_code" value="<%=QueryData.ase_code %>">
+                                        <input type="text" class="form-control" id="ase_code"
+                                            placeholder="Salary Payout" name="ase_code"
+                                            value="<%=QueryData.ase_code %>">
 
                                     </div>
 
                                     <div class="col-2 mt-2">
 
-                                        <label for="ASE-NAME" class="mr-sm-2">SO NAME</label>
+                                        <label for="ASE-NAME" class="mr-sm-2">Incentive Payout </label>
 
-                                        <input type="text" class="form-control" id="ase_name" placeholder="so_name"
-                                            name="ase_name" value="<%=QueryData.ase_name %>">
+                                        <input type="text" class="form-control" id="ase_name"
+                                            placeholder="Incentive Payout	" name="ase_name"
+                                            value="<%=QueryData.ase_name %>">
 
                                     </div>
 
@@ -203,30 +182,15 @@
                                     width="100%">
                                     <thead>
                                         <tr>
-                                            <th class="tabel-width">SO EMAIL ID</th>
-                                            <th class="tabel-width">SO CODE</th>
-                                            <th class="tabel-width">SO NAME</th>
-                                            <th class="tabel-width">Distributor ID</th>
+                                            <th class="tabel-width">SO Name </th>
+                                            <th class="tabel-width">DSR Code </th>
+                                            <th class="tabel-width">DSR Code </th>
                                             <th class="tabel-width">Distributor NAME</th>
-                                            <th class="tabel-width">DSR ID</th>
-                                            <th class="tabel-width">DSR NAME</th>
-                                            <th class="tabel-width">DSR TYPE</th>
-                                            <th class="tabel-width">VIKAS ID</th>
-                                            <th class="tabel-width">HQ LOCATION</th>
-                                            <th class="tabel-width">STATE NAME</th>
-                                            <th class="tabel-width">CITY NAME</th>
-                                            <th class="tabel-width">BENEFICIARY NAME</th>
-                                            <th class="tabel-width">ADDRESS</th>
-                                            <th class="tabel-width">BANK A/C NO.</th>
-                                            <th class="tabel-width">BANK NAME</th>
-                                            <th class="tabel-width">IFSC CODE</th>
-                                            <th class="tabel-width">MOBILE NO</th>
-                                            <th class="tabel-width">PAYOUT MONTH</th>
-                                            <th class="tabel-width">PAYOUT AMOUNT</th>
-                                            <th class="tabel-width">PAYMENT STATUS</th>
-                                            <th class="tabel-width">UTR NO</th>
-                                            <th class="tabel-width">CHANNEL TYPE</th>
-                                            <th class="tabel-width">PAYOUT DATE</th>
+                                            <th class="tabel-width">Distributor Code </th>
+                                            <th class="tabel-width">Salary Payout </th>
+                                            <th class="tabel-width">Incentive Payout </th>
+                                            <th class="tabel-width">Payout Month </th>
+
                                         </tr>
                                     </thead>
 

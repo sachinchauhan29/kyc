@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                                 <div class="text-right mb-3">
-                                    <button type="submit"
+                                    <button type="reset"
                                         class="btn-shadow  btn btn-primary custom-btn  btn-lg mt-3">Reset</button>
                                     <button type="submit"
                                         class="btn-shadow  btn btn-primary custom-btn  btn-lg mt-3">Apply</button>
@@ -210,10 +210,30 @@
                                             <%= data.email_id %>
                                         </td>
                                         <td>
-                                            <%= data.outlet_photo %>
+                                            <% if (data.outlet_photo) { %>
+                                                <a id="imageLink" href="<%= data.outlet_photo %>">
+                                                    <img src="<%= data.outlet_photo %>" alt="Description of the image"
+                                                        width="100" height="50" style="font-size: 50px;"
+                                                        onclick="return false;">
+                                                </a>
+                                                <% } else { %>
+                                                    <p>image not available</p>
+                                                    <% } %>
+
                                         </td>
                                         <td>
-                                            <%= data.profile_photo %>
+                                            <% if (data.profile_photo) { %>
+                                                <a id="imageLink" href="<%= data.profile_photo %>">
+                                                    <img src="<%= data.profile_photo %>" alt="Description of the image"
+                                                        width="100" height="50" style="font-size: 50px;"
+                                                        onclick="return false;">
+                                                </a>
+                                                <% } else { %>
+                                                    <p>image not available</p>
+                                                    <% } %>
+
+
+
                                         </td>
                                     </tr>
                                     <% }) %>

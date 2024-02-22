@@ -34,7 +34,7 @@ const router = express.Router();
 const routes = [
     {
         path: '/',
-        route: dashboardRoute
+        route: accountRoutes
     },
     {
         path: '/dashboard',

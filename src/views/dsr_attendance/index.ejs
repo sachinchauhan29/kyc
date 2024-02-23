@@ -127,10 +127,10 @@
                 </form>
               </div>
 
-              <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
+              <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
                 Showing <%= Math.min((currentPage - 1) * 10 + 1, totalEntrie) %>
                   to <%= Math.min(currentPage * 10, totalEntrie) %> of <%= totalEntrie %> entries
-              </div>
+              </div> -->
 
               <div class="table table-striped table-bordered table-responsive dataTable no-footer">
                 <table id="auth" class="table dataTables_wrapper table-bordered" cellspacing="0" width="100%">
@@ -192,7 +192,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="dataTables_paginate paging_simple_numbers mb-5" id="example_paginate">
+              <!-- <div class="dataTables_paginate paging_simple_numbers mb-5" id="example_paginate">
                 <a href="/authentication?page=<%= currentPage - 1 %>"
                   class="paginate_button previous <%= startPage === 1 ? 'disabled' : '' %>" aria-controls="example"
                   data-dt-idx="0" tabindex="-1" id="example_previous">Previous</a>
@@ -207,7 +207,7 @@
                 <a href="/authentication?page=<%= (parseInt(currentPage) + 1) %>"
                   class="paginate_button next <%= endPage === totalRows ? 'disabled' : '' %>" aria-controls="example"
                   id="example_next">Next</a>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.route('/').get(userAuth, getDetails, getNotification, RetailerWhitelistingContrl.dataWhitelistingView);
 router.route('/save-whitelist-data').post(userAuth, getDetails, RetailerWhitelistingContrl.saveWhitelisnting);
-router.route('/upload-data').post(userAuth, getDetails, RetailerWhitelistingContrl.uploadData);
+router.route('/uploaddata').post(userAuth, getDetails, RetailerWhitelistingContrl.uploadData);
 router.route('/download-sample').get(userAuth, getDetails, RetailerWhitelistingContrl.downloadSample);
 router.route('/updateStatus').post(userAuth, getDetails, RetailerWhitelistingContrl.UpdateStatus);
 router.route('/export').get(userAuth, getDetails, RetailerWhitelistingContrl.exportWhitelist);

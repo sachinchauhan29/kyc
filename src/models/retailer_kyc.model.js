@@ -2,19 +2,46 @@ const dbCon = require('../config/db');
 
 
 
-const getretailerkyc = async(data)=>{
-    
-    let query = "SELECT * FROM retailerkyc_details WHERE 1=1 ";
-    // if(data.Mobile) {
-    //   query += ` AND distributor_kyc.mobile_no = '${data.Mobile}'`;
-    // }
-    // if(data.email) {
-    //   query += ` AND distributor_kyc.email_id = '${data.email}'`;
-    // }
-    // if(data.toDate && data.fromDate)
-    // {
-    //     query+=`AND distributor_kyc.create_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
-    // }
+const getretailerkyc = async (data) => {
+  let query = `
+  SELECT 
+      retailerkyc_details.*, 
+      awsm_details.*, 
+      aw_details.*, 
+      ase_details.* 
+  FROM 
+      retailerkyc_details 
+      INNER JOIN 
+      awsm_details ON awsm_details.awsm_code = retailerkyc_details.RetailerCode 
+      INNER JOIN 
+      aw_details ON retailerkyc_details.aw_code = aw_details.aw_code 
+      INNER JOIN 
+      ase_details ON retailerkyc_details.ase_email = ase_details.ase_email_id`;
+
+  if (data.Mobile) {
+    query += ` AND retailerkyc_details.mobile_no = '${data.Mobile}'`;
+  }
+  if (data.email) {
+    query += ` AND retailerkyc_details.email_id = '${data.email}'`;
+  }
+  if (data.RetailerCode) {
+    query += ` AND retailerkyc_details.RetailerCode = '${data.RetailerCode}'`;
+  }
+  if (data.awsm_name) {
+    query += ` AND awsm_details.awsm_name = '${data.awsm_name}'`;
+  }
+  if (data.salesman_type) {
+    query += ` AND awsm_details.salesman_type = '${data.salesman_type}'`;
+  }
+  if (data.aw_code) {
+    query += ` AND awsm_details.aw_code = '${data.aw_code}'`;
+  }
+  if (data.toDate && data.fromDate) {
+    query += ` AND retailerkyc_details.create_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
+  }
+
+  // Add the LIMIT clause at the end of the query
+  query += ` LIMIT 5`;
 
   //  console.log(query);
 
@@ -47,4 +74,4 @@ const getretailerkyc = async(data)=>{
 
 
 
-module.exports = {getretailerkyc}
+module.exports = { getretailerkyc }

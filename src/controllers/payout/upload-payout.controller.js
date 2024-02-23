@@ -86,13 +86,13 @@ const uploadPayoutFile = async (req, res) => {
     Promise.all(promiseArray)
       .then(async () => {
         const fields = [
-          { label: 'ASE Email Id', value: 'ase_email_id' },
-          { label: "ASE NAME", value: 'ase_name' },
-          { label: 'ASE CODE', value: 'ase_employee_code' },
-          { label: 'AW Name', value: "aw_name" },
-          { label: 'AW CODE', value: 'aw_code' },
-          { label: 'AWSM NAME', value: 'awsm_name' },
-          { label: 'AWSM CODE', value: 'awsm_code' },
+          { label: 'SO Email Id', value: 'ase_email_id' },
+          { label: "SO NAME", value: 'ase_name' },
+          { label: 'SO CODE', value: 'ase_employee_code' },
+          { label: 'DISTRIBUTOR Name', value: "aw_name" },
+          { label: 'DISTRIBUTOR CODE', value: 'aw_code' },
+          { label: 'DSR NAME', value: 'awsm_name' },
+          { label: 'DSR CODE', value: 'awsm_code' },
           { label: 'BNAK ACCOUNT NO', value: 'bank_account_no' },
           { label: 'BANK NAME', value: 'bank_name' },
           { label: 'ADDRESS', value: 'address' },

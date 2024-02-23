@@ -6621,9 +6621,9 @@ a.close.disabled {
     opacity: .5
 }
 
-.modal-top {
+/* .modal-top {
     top: 50px;
-}
+} */
 
 .modal-topp {
     top: 250px;

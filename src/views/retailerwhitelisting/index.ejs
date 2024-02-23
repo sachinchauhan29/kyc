@@ -137,7 +137,7 @@
                                                 <div class="modal-body text-center" style="height: 400px;
                                                         overflow-x: auto;">
                                                     <form class="form-container"
-                                                        action="./data-whitelisting/upload-data" method="post"
+                                                        action="./retailerwhitelisting/uploaddata" method="post"
                                                         enctype="multipart/form-data" onsubmit="setAction()">
 
                                                         <div class="container">
@@ -149,13 +149,13 @@
                                                                     &nbsp; <label for="upload-data">Update Retailer
                                                                     </label>
                                                                 </div>
-                                                                <div
+                                                                <!-- <div
                                                                     class="col-6 text-center d-flex align-items-center">
                                                                     <input type="radio" id="delete-awsm" name="action"
                                                                         value="delete-awsm">
                                                                     &nbsp; <label for="delete-awsm">Delete Retailer
                                                                     </label>
-                                                                </div>
+                                                                </div> -->
                                                                 <div class="col-12 mx-auto">
                                                                     <div class="upload-files-container">
                                                                         <div class="row">
@@ -195,7 +195,7 @@
                                                         <script>
                                                             function setAction() {
                                                                 const action = document.querySelector('input[name="action"]:checked').value;
-                                                                document.forms[0].action = `./data-whitelisting/upload-data?action=${action}`;
+                                                                document.forms[0].action = `./retailerwhitelisting/uploaddata?action=${action}`;
                                                             }
                                                         </script>
                                                     </form>
@@ -231,62 +231,62 @@
                                     <div class="col-2">
                                         <label for="ASE CODE" class="mr-sm-2">Region
                                         </label>
-                                        <input type="text" class="form-control" id="ase_code" placeholder="Region"
-                                            name="ase_code" value="<%=QueryData.ase_code %>">
+                                        <input type="text" class="form-control" id="Region" placeholder="Region"
+                                            name="Region" value="<%=QueryData.Region %>">
                                     </div>
                                     <div class="col-2">
                                         <label for="ASE NAME" class="mr-sm-2">RSM</label>
-                                        <input type="text" class="form-control" id="ase_name" placeholder="RSM"
-                                            name="ase_name" value="<%=QueryData.ase_name %>">
+                                        <input type="text" class="form-control" id="RSM" placeholder="RSM" name="RSM"
+                                            value="<%=QueryData.RSM %>">
                                     </div>
                                     <div class="col-2">
                                         <label for="AW CODE" class="mr-sm-2">ASM Area Code</label>
-                                        <input type="text" class="form-control" id="aw_code" placeholder="ASM Area Code"
-                                            name="aw_code" value="<%=QueryData.aw_code %>">
+                                        <input type="text" class="form-control" id="ASMAreaCode"
+                                            placeholder="ASM Area Code" name="ASMAreaCode"
+                                            value="<%=QueryData.ASMAreaCode %>">
                                     </div>
                                     <div class="col-2">
-                                        <label for="SALESMAN NAME" class="mr-sm-2">S.O Dis. Code</label>
-                                        <input type="text" class="form-control" id="awsm_name"
-                                            placeholder="S.O Dis. Code" name="salesman_name"
-                                            value="<%=QueryData.salesman_name %>">
+                                        <label for="SALESMAN NAME" class="mr-sm-2">sales officer</label>
+                                        <input type="text" class="form-control" id="SO" placeholder="sales officer"
+                                            name="SO" value="<%=QueryData.SO %>">
                                     </div>
 
                                     <div class="col-2 ">
                                         <label for="SALESMAN CODE" class="mr-sm-2">Distributor Name</label>
                                         <input type="text" class="form-control" id="awsm_code"
-                                            placeholder="Distributor Name" name="salesman_id"
-                                            value="<%=QueryData.salesman_id %>">
+                                            placeholder="Distributor Name" name="DistributorCode"
+                                            value="<%=QueryData.DistributorCode %>">
                                     </div>
                                     <div class="col-2 ">
                                         <label for="ASE EMAIL ID" class="mr-sm-2">Retailer Code</label>
-                                        <input type="text" class="form-control" id="ase_email_id"
-                                            placeholder="RetailerCode" name="ase_email_id"
-                                            value="<%=QueryData.ase_email_id %>">
+                                        <input type="text" class="form-control" id="RetailerCode"
+                                            placeholder="RetailerCode" name="RetailerCode"
+                                            value="<%=QueryData.RetailerCode %>">
                                     </div>
                                     <div class="col-2 mt-2">
                                         <label for="ASE EMAIL ID" class="mr-sm-2">Retailer Name</label>
-                                        <input type="text" class="form-control" id="ase_email_id"
-                                            placeholder="RetailerName" name="ase_email_id"
-                                            value="<%=QueryData.ase_email_id %>">
+                                        <input type="text" class="form-control" id="RetailerName"
+                                            placeholder="RetailerName" name="RetailerName"
+                                            value="<%=QueryData.RetailerName %>">
                                     </div>
                                     <div class="col-2 mt-2">
                                         <label for="ASE EMAIL ID" class="mr-sm-2">SalesMan Code </label>
-                                        <input type="text" class="form-control" id="ase_email_id"
-                                            placeholder="alesMan Code" name="ase_email_id"
-                                            value="<%=QueryData.ase_email_id %>">
+                                        <input type="text" class="form-control" id="SalesManCode"
+                                            placeholder="alesMan Code" name="SalesManCode"
+                                            value="<%=QueryData.SalesManCode %>">
                                     </div>
                                     <div class="col-2 mt-2">
                                         <label for="ASE EMAIL ID" class="mr-sm-2">SalesMan Name </label>
-                                        <input type="text" class="form-control" id="ase_email_id"
-                                            placeholder="SalesMan Name" name="ase_email_id"
-                                            value="<%=QueryData.ase_email_id %>">
+                                        <input type="text" class="form-control" id="SalesManName"
+                                            placeholder="SalesMan Name" name="SalesManName"
+                                            value="<%=QueryData.SalesManName %>">
                                     </div>
                                     <div class="col-2 mt-2">
                                         <label for="ASE EMAIL ID" class="mr-sm-2">SalesMan Emp Code
                                         </label>
-                                        <input type="text" class="form-control" id="ase_email_id"
-                                            placeholder="SalesMan Emp Code" name="ase_email_id"
-                                            value="<%=QueryData.ase_email_id %>">
+                                        <input type="text" class="form-control" id="SalesManEmpCode"
+                                            placeholder="SalesMan Emp Code" name="SalesManEmpCode"
+                                            value="<%=QueryData.SalesManEmpCode %>">
                                     </div>
                                     <div class="col-2 mt-2">
                                         <label for="FROM" class="mr-sm-2">FROM</label>
@@ -329,22 +329,21 @@
                                 </div> -->
                             </div>
 
-                            <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
+                            <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
                                 Showing <%= Math.min((currentPage - 1) * 10 + 1, totalEntrie) %> to <%=
                                         Math.min(currentPage * 10, totalEntrie) %> of <%= totalEntrie %> entries
-                            </div>
+                            </div> -->
 
 
-                            <table id="examplea" class="table table-striped table-bordered table-responsive"
+                            <table id="example" class="table table-striped table-bordered table-responsive"
                                 cellspacing="0" width="100%">
-
-
                                 <thead>
                                     <tr>
                                         <th class="tabel-width">Region</th>
                                         <th class="tabel-width">RSM</th>
                                         <th class="tabel-width">ASM Area Code</th>
-                                        <th class="tabel-width">S.O Distributor Code</th>
+                                        <th class="tabel-width">sales officer</th>
+                                        <th class="tabel-width">Distributor Code</th>
                                         <th class="tabel-width">Distributor Name</th>
                                         <th class="tabel-width">RetailerCode</th>
                                         <th class="tabel-width">RetailerName</th>
@@ -356,24 +355,49 @@
                                 </thead>
 
                                 <tbody>
-                                    <tr>
-                                        <td class="tabel-width">Region</td>
-                                        <td class="tabel-width">RSM</td>
-                                        <td class="tabel-width">ASM Area Code</td>
-                                        <td class="tabel-width">S.O Distributor Code</td>
-                                        <td class="tabel-width">Distributor Name</td>
-                                        <td class="tabel-width">RetailerCode</td>
-                                        <td class="tabel-width">RetailerName</td>
-                                        <td class="tabel-width">SalesMan Code</td>
-                                        <td class="tabel-width">SalesMan Name</td>
-                                        <td class="tabel-width">SalesMan Emp Code</td>
+                                    <% retailerDataQuery.forEach((data)=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= data.Region %>
+                                            </td>
+                                            <td>
+                                                <%= data.RSM %>
+                                            </td>
+                                            <td>
+                                                <%= data.ASMAreaCode%>
+                                            </td>
+                                            <td>
+                                                <%= data.SO%>
+                                            </td>
+                                            <td>
+                                                <%= data.DistributorCode%>
+                                            </td>
+                                            <td>
+                                                <%= data.DistributorName%>
+                                            </td>
+                                            <td>
+                                                <%= data.RetailerCode%>
+                                            </td>
+                                            <td>
+                                                <%= data.RetailerName%>
+                                            </td>
+                                            <td>
+                                                <%= data.SalesManCode%>
+                                            </td>
+                                            <td>
+                                                <%= data.SalesManName%>
+                                            </td>
+                                            <td>
+                                                <%= data.SalesManEmpCode%>
+                                            </td>
+                                        </tr>
+                                        <%})%>
 
-                                    </tr>
                                 </tbody>
 
                             </table>
 
-                            <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
+                            <!-- <div class="dataTables_paginate paging_simple_numbers" id="example_paginate">
                                 <a href="/retailerwhitelisting?page=<%= currentPage - 1 %>"
                                     class="paginate_button previous <%= startPage === 1 ? 'disabled' : '' %>"
                                     aria-controls="example" data-dt-idx="0" tabindex="-1"
@@ -389,7 +413,7 @@
                                 <a href="/retailerwhitelisting?page=<%= (parseInt(currentPage) + 1) %>"
                                     class="paginate_button next <%= endPage === totalRows ? 'disabled' : '' %>"
                                     aria-controls="example" id="example_next">Next</a>
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -581,9 +605,9 @@
 
     <script>
 
-        function fnExcelReport(file, ase_code, ase_name, aw_code, awsm_name, awsm_code, salesman_type, ase_email_id, fromDate, toDate) {
+        function fnExcelReport(file, Region,) {
 
-            fetch(`/data-whitelisting/export?ase_code=${ase_code}&ase_name=${ase_name}&aw_code=${aw_code}&awsm_name=${awsm_name}&awsm_code=${awsm_code}&salesman_type=${salesman_type}&ase_email_id=${ase_email_id}&fromDate=${fromDate}&toDate=${toDate}`)
+            fetch(`/retailerwhitelisting/export?Region=${Region}`)
                 .then((res) => res.json())
                 .then((data) => {
 
@@ -625,51 +649,32 @@
         function createCSV(data) {
 
             const headers = [
-                "SALESMAN CREATED DATE",
-                "SALESMAN STATUS",
-                "ASE EMAIL ID",
-                "ASE NAME",
-                "ASE CODE",
-                "ASE STATE",
-                "ASE CITY",
-                "AW NAME",
-                "AW CODE",
-                "AW STATE",
-                "AW CITY",
-                "SALESMAN NAME",
-                "SALESMAN CODE",
-                "SALESMAN STATE",
-                "SALESMAN CITY",
-                "SALESMAN TYPE",
-                "VIKAS ID",
-                "REGION",
-                "CHANNEL TYPE",
-                "ACTION"
+                "Region",
+                "RSM",
+                "ASMAreaCode",
+                "salesofficer",
+                "DistributorCode",
+                "DistributorName",
+                "RetailerCode",
+                "RetailerName",
+                "SalesManCode",
+                "SalesManName",
+                "SalesManEmpCode",
             ]
 
             const flattenData = data.map(item => ({
-                "SALESMAN CREATED DATE": item.insert_timestamp,
-                "SALESMAN STATUS": (item.is_active == 1) ? 'ACTIVE' : 'UNACTIVE',
-                "ASE EMAIL ID": item.ase_email_id,
-                "ASE NAME": item.ase_name,
-                "ASE CODE": item.ase_employee_code,
-                "ASE STATE": item.ase_state,
-                "ASE CITY": item.ase_city,
-                "AW NAME": item.aw_name,
-                "AW CODE": item.aw_code,
-                "AW STATE": item.aw_state,
-                "AW CITY": item.aw_city,
-                "SALESMAN NAME": item.awsm_name,
-                "SALESMAN CODE": item.awsm_code,
-                "SALESMAN STATE": item.awsm_state,
-                "SALESMAN CITY": item.awsm_city,
-                "SALESMAN TYPE": item.salesman_type,
-                "VIKAS ID": " ",
-                "REGION": item.region,
-                "CHANNEL TYPE": item.channel,
-                "ACTION": ""
+                "Region": item.Region,
+                "RSM": item.RSM,
+                "ASMAreaCode": item.ASMAreaCode,
+                "salesofficer": item.SO,
+                "DistributorCode": item.DistributorCode,
+                "DistributorName": item.DistributorName,
+                "RetailerCode": item.RetailerCode,
+                "RetailerName": item.RetailerName,
+                "SalesManCode": item.SalesManCode,
+                "SalesManName": item.SalesManName,
+                "SalesManEmpCode": item.SalesManEmpCode,
             }));
-
             const replacer = (key, value) => (value === null ? "" : value);
             const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
             return csvContent;
@@ -684,20 +689,14 @@
         }
 
 
-        document.getElementById("btnExport")
-            .addEventListener("click", function () {
-                var filename = "dataWhiteListing.csv";
-                var salesman_type = document.getElementById("salesman_type").value;
-                var aw_code = document.getElementById("aw_code").value;
-                var awsm_name = document.getElementById("awsm_name").value;
-                var awsm_code = document.getElementById("awsm_code").value;
-                var ase_code = document.getElementById("ase_code").value;
-                var ase_name = document.getElementById("ase_name").value;
-                var fromDate = document.getElementById("fromDate").value;
-                var toDate = document.getElementById("toDate").value;
-                var ase_email_id = document.getElementById("ase_email_id").value;
-                fnExcelReport(filename, ase_code, ase_name, aw_code, awsm_name, awsm_code, salesman_type, ase_email_id, fromDate, toDate);
-            }, false);
+        document.getElementById("btnExport").addEventListener("click", function () {
+            var filename = "retailerwhitelisting.csv";
+            var Region = document.getElementById("Region").value;
+            var RSM = document.getElementById("RSM").value;
+            var ASMAreaCode = document.getElementById("ASMAreaCode").value;
+            var SO = document.getElementById("SO").value;
+            fnExcelReport(filename, Region, RSM, ASMAreaCode, SO,);
+        }, false);
 
     </script>
 
@@ -749,7 +748,7 @@
 
     </script>
 
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
             var table = document.querySelector('#example');
             var dataTable = new DataTable(table, {
@@ -768,7 +767,7 @@
                 ]
             });
         });
-    </script>
+    </script> -->
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -802,7 +801,7 @@
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+    <!-- <script>
         $(document).ready(function () {
             $('tbody').on('change', '.id-check-checkbox', function () {
                 var isChecked = $(this).prop('checked');
@@ -821,7 +820,7 @@
                 });
             });
         });
-    </script>
+    </script> -->
 
     <script>
         var action = document.getElementById("").value;
@@ -846,5 +845,12 @@
         });
     </script> -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var table = document.querySelector('#example');
+            var dataTable = new DataTable(table, {
 
+            });
+        });
+    </script>
     <%- include("../shared/footer"); %>

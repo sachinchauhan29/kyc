@@ -29,7 +29,7 @@ const signup = async (req, res) => {
 
         req.session.message = 'registration successfully!';
         res.cookie('token', token, { httpOnly: true });
-        return res.redirect("/dashboard");
+        return res.redirect("/kyc");
     }
     catch (error) {
         console.log(error);
@@ -58,7 +58,7 @@ const userLogin = async (req, res) => {
                 // await updateQuery(req.query);
                 // results[0].token = token;
                 res.cookie('token', token, { httpOnly: true });
-                return res.redirect("/dashboard");
+                return res.redirect("/kyc");
             } else {
                 req.session.message = 'Password is wrong!';
                 return res.redirect('/account');

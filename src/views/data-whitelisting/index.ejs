@@ -360,7 +360,6 @@
                                         <th class="tabel-width">DSR STATE</th>
                                         <th class="tabel-width">DSR CITY</th>
                                         <th class="tabel-width">DSR TYPE</th>
-                                        <th class="tabel-width">VIKAS ID</th>
                                         <th class="tabel-width">REGION</th>
                                         <th class="tabel-width">CHANNEL TYPE</th>
                                         <th class="tabel-width">ACTION</th>
@@ -750,46 +749,46 @@
         function createCSV(data) {
 
             const headers = [
-                "SALESMAN CREATED DATE",
-                "SALESMAN STATUS",
-                "ASE EMAIL ID",
-                "ASE NAME",
-                "ASE CODE",
-                "ASE STATE",
-                "ASE CITY",
-                "AW NAME",
-                "AW CODE",
-                "AW STATE",
-                "AW CITY",
-                "SALESMAN NAME",
-                "SALESMAN CODE",
-                "SALESMAN STATE",
-                "SALESMAN CITY",
-                "SALESMAN TYPE",
-                "VIKAS ID",
+                "DSR CREATED DATE",
+                "DSR STATUS",
+                "SO EMAIL ID",
+                "SO NAME",
+                "SO CODE",
+                "SO STATE",
+                "SO CITY",
+                "DISTRIBUTOR NAME",
+                "DISTRIBUTOR CODE",
+                "DISTRIBUTOR STATE",
+                "DISTRIBUTOR CITY",
+                "DSR NAME",
+                "DSR CODE",
+                "DSR STATE",
+                "DSR CITY",
+                "DSR TYPE",
+              
                 "REGION",
                 "CHANNEL TYPE",
                 "ACTION"
             ]
 
             const flattenData = data.map(item => ({
-                "SALESMAN CREATED DATE": item.insert_timestamp,
-                "SALESMAN STATUS": (item.is_active == 1) ? 'ACTIVE' : 'UNACTIVE',
-                "ASE EMAIL ID": item.ase_email_id,
-                "ASE NAME": item.ase_name,
-                "ASE CODE": item.ase_employee_code,
-                "ASE STATE": item.ase_state,
-                "ASE CITY": item.ase_city,
-                "AW NAME": item.aw_name,
-                "AW CODE": item.aw_code,
-                "AW STATE": item.aw_state,
-                "AW CITY": item.aw_city,
-                "SALESMAN NAME": item.awsm_name,
-                "SALESMAN CODE": item.awsm_code,
-                "SALESMAN STATE": item.awsm_state,
-                "SALESMAN CITY": item.awsm_city,
-                "SALESMAN TYPE": item.salesman_type,
-                "VIKAS ID": " ",
+                "DSR CREATED DATE": item.insert_timestamp,
+                "DSR STATUS": (item.is_active == 1) ? 'ACTIVE' : 'UNACTIVE',
+                "SO EMAIL ID": item.ase_email_id,
+                "SO NAME": item.ase_name,
+                "SO CODE": item.ase_employee_code,
+                "SO STATE": item.ase_state,
+                "SO CITY": item.ase_city,
+                "DISTRIBUTOR NAME": item.aw_name,
+                "DISTRIBUTOR CODE": item.aw_code,
+                "DISTRIBUTOR STATE": item.aw_state,
+                "DISTRIBUTOR CITY": item.aw_city,
+                "DSR NAME": item.awsm_name,
+                "DSR CODE": item.awsm_code,
+                "DSR STATE": item.awsm_state,
+                "DSR CITY": item.awsm_city,
+                "DSR TYPE": item.salesman_type,
+              
                 "REGION": item.region,
                 "CHANNEL TYPE": item.channel,
                 "ACTION": ""

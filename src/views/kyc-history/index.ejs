@@ -553,9 +553,27 @@
                                                     </div>
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new bg-yello wtabel-img">
+                                                    <div class="tabel-img" style="width: 100px; height: 50px;">
+                                                        <a id="imageLink" href="<%= data.pancard_image %>">
+                                                            <img src="<%= data.pancard_image %>"
+                                                                alt="Description of the image" width="100" height="50"
+                                                                font-size="50px" onclick="return false;">
+                                                        </a>
+                                                        <input type="hidden" value="<%= data.pancard_image %>"
+                                                            name="pancard_image">
+                                                    </div>
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name=""
+                                                        class="form-control" value="<%= data.pancard_no %>" readonly="">
+                                                </li>
+
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.bank_account_no %>"
-                                                        readonly=""></li>
+                                                        readonly="">
+                                                </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.ifsc_code %>" readonly="">
@@ -567,8 +585,9 @@
                                                         <input type="hidden" value="<%= data.bank_cheque %>"
                                                             name="bank_cheque">
                                                     </a></li>
+
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name=""
+                                                    class="header-contents-new"><input type="text" name="bank_name"
                                                         class="form-control" value="<%= data.bank_name %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
@@ -764,30 +783,20 @@
             const headers = [
                 "CREATE DATE",
                 "KYC TYPE",
-                "ASE EMAIL ID",
-                "ASE CODE",
-                "ASE NAME",
-                "SALESMAN ID",
-                "SALESMAN NAME",
-                "SALESMAN TYPE",
-                "VIKAS ID",
-                "HQ LOCATION",
-                "DISTRICT",
-                "TEHSIL/SUB DISTRICT",
-                "HQ TOWN",
-                "HQ TOWN CENSUS CODE",
-                "MV",
-                "AW1 ID",
-                "AW1 NAME",
-                "AW2 ID",
-                "AW3 ID",
-                "AW4 ID",
-                "AW5 ID",
+                "SO EMAIL ID",
+                "SO CODE",
+                "SO NAME",
+                "DSR ID",
+                "DSR NAME",
+                "Distributor ID",
+                "Distributor NAME",
                 "BENEFICIARY NAME",
                 "STATE NAME",
                 "CITY NAME",
                 "ADDRESS",
-                "SALESMAN PHOTO",
+                "DSR PHOTO",
+                "DSR PAN PHOTO",
+                "DSR PAN Card No.",
                 "BANK A/C NO.",
                 "IFSC CODE",
                 "CHEQUE IMAGE",
@@ -799,7 +808,7 @@
                 "VALIDATION CALLING REMARK",
                 "KYC STATUS",
                 "KYC REJECTION REASON",
-                "WIP REMARKS",
+                "REMARKS",
                 "VERIFICATION DATE",
                 "GENDER",
                 "DOB",
@@ -827,30 +836,23 @@
             const flattenData = data.map(item => ({
                 "CREATE DATE": item.created_on,
                 "KYC TYPE": item.kyc_type,
-                "ASE EMAIL ID": item.ase_email,
-                "ASE CODE": item.ase_employee_code,
-                "ASE NAME": item.ase_name,
-                "SALESMAN ID": item.awsm_code,
-                "SALESMAN NAME": item.awsm_name,
-                "SALESMAN TYPE": item.salesman_type,
-                "VIKAS ID": "",
-                "HQ LOCATION": "",
-                "DISTRICT": "",
-                "TEHSIL/SUB DISTRICT": "",
-                "HQ TOWN": "",
-                "HQ TOWN CENSUS CODE": "",
-                "MV": "",
-                "AW1 ID": item.aw_code,
-                "AW1 NAME": item.aw_name,
-                "AW2 ID": " ",
-                "AW3 ID": " ",
-                "AW4 ID": " ",
-                "AW5 ID": " ",
+                "SO EMAIL ID": item.ase_email,
+                "SO CODE": item.ase_employee_code,
+                "SO NAME": item.ase_name,
+                "DSR ID": item.awsm_code,
+                "DSR NAME": item.awsm_name,
+                "DISTRIUTOR ID": item.aw_id,
+                "DISTRIUTOR NAME": item.aw_name,
+
                 "BENEFICIARY NAME": item.beneficiary_name,
                 "STATE NAME": item.awsm_state,
                 "CITY NAME": item.awsm_city,
                 "ADDRESS": item.address,
-                "SALESMAN PHOTO": item.photo,
+
+                "DSR PHOTO": item.photo,
+                "DSR PAN PHOTO": item.pancard_image,
+                "DSR PAN CARD No.": item.pancard_no,
+
                 "BANK A/C NO.": item.bank_account_no,
                 "IFSC CODE": item.ifsc_code,
                 "CHEQUE IMAGE": item.bank_cheque,

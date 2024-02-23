@@ -8,7 +8,7 @@ const selectKycData = async (data) => {
       INNER JOIN awsm_details ON awsm_details.awsm_code = kyc_details.awsm_code
       INNER JOIN aw_details ON kyc_details.aw_code = aw_details.aw_code
       INNER JOIN ase_details ON kyc_details.ase_email = ase_details.ase_email_id
-      WHERE status = 'PENDING' AND (kyc_type = 'FRESH' OR kyc_type = 'Replace-KYC-Request' OR kyc_type = 'RE-KYC-Request')
+      WHERE kyc_details.status = 'PENDING' AND (kyc_type = 'FRESH' OR kyc_type = 'Replace-KYC-Request' OR kyc_type = 'RE-KYC-Request')
     `;
 
   if (data.mobile_no) {
@@ -74,6 +74,7 @@ const filterKycData = async (data) => {
   INNER JOIN ase_details ON kyc_details.ase_email = ase_details.ase_email_id
   WHERE kyc_details.kyc_type IN ('FRESH', 'Replace-KYC-Request', 'RE-KYC-Request')
   AND kyc_details.status = 'PENDING'`;
+
 
 
   if (data.Mobile) {

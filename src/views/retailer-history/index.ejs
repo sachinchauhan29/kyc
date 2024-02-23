@@ -64,8 +64,8 @@
                                     </a>
                                     <a class="mt-2" href="./kyc-history">
                                         <img src="./images/off.png" alt="">
-                                        DSR History</a>
-                                    <a class="mt-2" href="./kyc-history">
+                                        DSR KYC History</a>
+                                    <a class="mt-2" href="./retailer-history">
                                         <img src="./images/on.png" alt="">
                                         RETAILER History
                                     </a>
@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </div> -->
-                            <form action="./kyc-history">
+                            <form action="./retailer-history">
                                 <div class="row">
 
                                     <div class="col-2">
@@ -436,7 +436,11 @@
                                         <li style="width: 162px;padding: 17px 18px 18px 17px;"
                                             class="header-contents-new">ADDRESS</li>
                                         <li style="width: 162px;padding: 17px 26px 26px 17px;"
-                                            class="header-contents-new">SALESMAN PHOTO</li>
+                                            class="header-contents-new">RETAILER PHOTO</li>
+                                        <li style="width: 162px;padding: 17px 28px 28px 17px;"
+                                            class="header-contents-new">PAN PHOTO</li>
+                                        <li style="width: 162px;padding: 18px 20px 14px 18px;"
+                                            class="header-contents-new">PAN Card No.</li>
                                         <li style="padding: 17px 18px 18px 17px;width: 162px;"
                                             class="header-contents-new">BANK A/C NO.</li>
                                         <li style="width: 162px;padding: 17px 20px 20px 17px;"
@@ -509,11 +513,12 @@
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name="Create Date"
-                                                        class="form-control" value="<%= data.awsm_code %>" readonly="">
+                                                        class="form-control" value="<%= data.RetailerCode %>"
+                                                        readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
-                                                        class="form-control" value="<%= data.awsm_name %>" readonly="">
+                                                        class="form-control" value="<%= data.created_by %>" readonly="">
                                                 </li>
 
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
@@ -552,9 +557,27 @@
                                                     </div>
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new bg-yello wtabel-img">
+                                                    <div class="tabel-img" style="width: 100px; height: 50px;">
+                                                        <a id="imageLink" href="<%= data.pancard_image %>">
+                                                            <img src="<%= data.pancard_image %>"
+                                                                alt="Description of the image" width="100" height="50"
+                                                                font-size="50px" onclick="return false;">
+                                                        </a>
+                                                        <input type="hidden" value="<%= data.pancard_image %>"
+                                                            name="pancard_image">
+                                                    </div>
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name=""
+                                                        class="form-control" value="<%= data.pancard_no %>" readonly="">
+                                                </li>
+
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.bank_account_no %>"
-                                                        readonly=""></li>
+                                                        readonly="">
+                                                </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.ifsc_code %>" readonly="">
@@ -566,8 +589,9 @@
                                                         <input type="hidden" value="<%= data.bank_cheque %>"
                                                             name="bank_cheque">
                                                     </a></li>
+
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name=""
+                                                    class="header-contents-new"><input type="text" name="bank_name"
                                                         class="form-control" value="<%= data.bank_name %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
@@ -713,7 +737,7 @@
     <script>
         function fnExcelReport(file, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city) {
 
-            fetch(`/kyc-history/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`)
+            fetch(`/retailer-history/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`)
                 .then((res) => res.json())
                 .then((data) => {
                     data.forEach((item) => {
@@ -763,30 +787,20 @@
             const headers = [
                 "CREATE DATE",
                 "KYC TYPE",
-                "ASE EMAIL ID",
-                "ASE CODE",
-                "ASE NAME",
-                "SALESMAN ID",
-                "SALESMAN NAME",
-                "SALESMAN TYPE",
-                "VIKAS ID",
-                "HQ LOCATION",
-                "DISTRICT",
-                "TEHSIL/SUB DISTRICT",
-                "HQ TOWN",
-                "HQ TOWN CENSUS CODE",
-                "MV",
-                "AW1 ID",
-                "AW1 NAME",
-                "AW2 ID",
-                "AW3 ID",
-                "AW4 ID",
-                "AW5 ID",
+                "SO EMAIL ID",
+                "SO CODE",
+                "SO NAME",
+                "RETAILER ID",
+                "RETAILER NAME",
+                "Distributor ID",
+                "Distributor NAME",
                 "BENEFICIARY NAME",
                 "STATE NAME",
                 "CITY NAME",
                 "ADDRESS",
-                "SALESMAN PHOTO",
+                "RETAILER PHOTO",
+                "PAN PHOTO",
+                "PAN Card No.",
                 "BANK A/C NO.",
                 "IFSC CODE",
                 "CHEQUE IMAGE",
@@ -798,14 +812,14 @@
                 "VALIDATION CALLING REMARK",
                 "KYC STATUS",
                 "KYC REJECTION REASON",
-                "WIP REMARKS",
+                "REMARKS",
                 "VERIFICATION DATE",
                 "GENDER",
                 "DOB",
                 "CHANNEL TYPE",
-                "MODIFIED DATE",
+                "MODIFICATION DATE",
                 "NEW MODIFICATION DATE"
-            ]
+            ];
 
             function dateFun(item) {
                 console.log(item);
@@ -826,49 +840,41 @@
             const flattenData = data.map(item => ({
                 "CREATE DATE": item.created_on,
                 "KYC TYPE": item.kyc_type,
-                "ASE EMAIL ID": item.ase_email,
-                "ASE CODE": item.ase_employee_code,
-                "ASE NAME": item.ase_name,
-                "SALESMAN ID": item.awsm_code,
-                "SALESMAN NAME": item.awsm_name,
-                "SALESMAN TYPE": item.salesman_type,
-                "VIKAS ID": "",
-                "HQ LOCATION": "",
-                "DISTRICT": "",
-                "TEHSIL/SUB DISTRICT": "",
-                "HQ TOWN": "",
-                "HQ TOWN CENSUS CODE": "",
-                "MV": "",
-                "AW1 ID": item.aw_code,
-                "AW1 NAME": item.aw_name,
-                "AW2 ID": " ",
-                "AW3 ID": " ",
-                "AW4 ID": " ",
-                "AW5 ID": " ",
+                "SO EMAIL ID": item.ase_email,
+                "SO CODE": item.ase_employee_code,
+                "SO NAME": item.ase_name,
+                "RETAILER ID": item.RetailerCode,
+                "RETAILER NAME": item.created_by,
+                "Distributor ID": item.aw_code,
+                "Distributor NAME": item.aw_name,
                 "BENEFICIARY NAME": item.beneficiary_name,
                 "STATE NAME": item.awsm_state,
                 "CITY NAME": item.awsm_city,
                 "ADDRESS": item.address,
-                "SALESMAN PHOTO": item.photo,
+                "RETAILER PHOTO": item.photo,
+                "PAN PHOTO": item.pancard_image,
+                "PAN Card No.": item.pancard_no,
                 "BANK A/C NO.": item.bank_account_no,
                 "IFSC CODE": item.ifsc_code,
-                "CHEQUE IMAGE": item.bank_cheque,
+                "CHEQUE IMAGE": item.cheque_image,
                 "BANK NAME": item.bank_name,
-                "PHOTO ID IMAGE": item.photo_id,
+                "PHOTO ID IMAGE": item.photo_id_image,
                 "MOBILE NO": item.mobile_no,
                 "CALLING COUNT": item.calling_count,
                 "CALLING STATUS": item.calling_status,
-                "VALIDATION CALLING REMARK": item.calling_remarks,
-                "KYC STATUS": item.status,
-                "KYC REJECTION REASON": item.wip_remarks,
-                "WIP REMARKS": item.approved_comment,
+                "VALIDATION CALLING REMARK": item.validation_calling_remark,
+                "KYC STATUS": item.kyc_status,
+                "KYC REJECTION REASON": item.kyc_rejection_reason,
+                "REMARKS": item.remarks,
                 "VERIFICATION DATE": dateFun(item),
                 "GENDER": item.gender,
                 "DOB": item.dob,
-                "CHANNEL TYPE": item.channel,
-                "MODIFIED DATE": (item.update_timestamp ? item.update_timestamp : ''),
-                "NEW MODIFICATION DATE": (item.update_old_modification_date ? item.update_old_modification_date : "")
+                "CHANNEL TYPE": item.channel_type,
+                "MODIFICATION DATE": item.modification_date,
+                "NEW MODIFICATION DATE": item.new_modification_date
             }));
+
+
 
             const replacer = (key, value) => (value === null ? "" : value);
             const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");

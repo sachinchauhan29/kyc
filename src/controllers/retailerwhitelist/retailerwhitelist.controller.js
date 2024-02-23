@@ -1,4 +1,5 @@
-const { totalEntries, selectDataWhitelisting, exportWhitelisting, getTotalCount, UpdateWhiteList, selectASE, updateASE, insertASE, selectAW, updateAW, insertAW, selectAWSM, updateAWSM, insertAWSM, insertIntoFileProcess, getUploadRecords, updateIsActiveStatus, UpdateAWSMHistory, deleteAWSM, selectKYC, awsmDetailsHistory, updateKYCDetailHistory, updateKYCDetail, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, deleteKYCDetail, selectAUTH, updateAUTHDetailHistory, updateAUTHDetail } = require("../../models/data-whitelisting.model");
+const { totalEntries, selectDataWhitelisting, getTotalCount, UpdateWhiteList, selectASE, updateASE, insertASE, selectAW, updateAW, insertAW, selectAWSM, updateAWSM, insertAWSM, insertIntoFileProcess, updateIsActiveStatus, UpdateAWSMHistory, deleteAWSM, selectKYC, awsmDetailsHistory, updateKYCDetailHistory, updateKYCDetail, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, deleteKYCDetail, selectAUTH, updateAUTHDetailHistory, updateAUTHDetail } = require("../../models/data-whitelisting.model");
+const { retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting } = require("../../models/retailerwhitelisting.model");
 const fs = require('fs');
 const json2csv = require('json2csv').parse;
 const moment = require('moment');
@@ -16,12 +17,16 @@ const dataWhitelistingView = async (req, res, next) => {
     let totalRows = await getTotalCount();
     let totalEntrie = await totalEntries();
 
+
+    let retailerDataQuery = await retailer(req.query);
     const maxVisiblePages = 4;
     let currentPage = req.query.page || 1;
     const startPage = Math.max(parseInt(currentPage) - Math.floor(maxVisiblePages / 2), 1);
     const endPage = Math.min(startPage + maxVisiblePages - 1, totalRows);
 
-    res.render('retailerwhitelisting', { user: res.userDetail, dataWhitelistingResult, uploadDataArray: fileProcessRecords, QueryData: req.query, notification: res.notification, startPage, endPage, currentPage, totalRows, totalEntrie })
+    res.render('retailerwhitelisting', { user: res.userDetail, dataWhitelistingResult, uploadDataArray: fileProcessRecords, QueryData: retailerDataQuery, notification: res.notification, startPage, endPage, currentPage, totalRows, totalEntrie, retailerDataQuery: retailerDataQuery })
+
+    //console.log('hghjglg', 'uploading...', retailerDataQuery);
 }
 
 const saveWhitelisnting = async (req, res) => {
@@ -38,7 +43,7 @@ const saveWhitelisnting = async (req, res) => {
             await updateAWSMDetail(req.body);
         }
         catch (error) {
-            return res.redirect("/data-whitelisting");
+            return res.redirect("/retailerwhitelisting");
         }
     }
 
@@ -55,10 +60,10 @@ const saveWhitelisnting = async (req, res) => {
             await update_kyc_details(req.body);
         }
         await updateAWSMKycAuthenticationDetails(req.body);
-        res.redirect("/data-whitelisting");
+        res.redirect("/retailerwhitelisting");
     }
     catch (error) {
-        res.redirect("/data-whitelisting");
+        res.redirect("/retailerwhitelisting");
     }
 }
 
@@ -203,22 +208,18 @@ const uploadData = async (req, res) => {
             for (let i = 0; i < data.length; i++) {
                 const element = data[i];
                 let excelObject = {
-                    ase_email_id: removeCommas(element[0]),
-                    ase_name: removeCommas(element[1]),
-                    ase_employee_code: removeCommas(element[2]),
-                    ase_state: removeCommas(element[3]),
-                    ase_city: removeCommas(element[4]),
-                    aw_name: removeCommas(element[5]),
-                    aw_code: removeCommas(element[6]),
-                    aw_state: removeCommas(element[7]),
-                    aw_city: removeCommas(element[8]),
-                    awsm_name: removeCommas(element[9]),
-                    awsm_code: removeCommas(element[10]),
-                    awsm_state: removeCommas(element[11]),
-                    awsm_city: removeCommas(element[12]),
-                    region: removeCommas(element[13]),
-                    salesman_type: removeCommas(element[14]),
-                    channel: removeCommas(element[15])
+                    Region: removeCommas(element[0]),
+                    RSM: removeCommas(element[1]),
+                    ASMAreaCode: removeCommas(element[2]),
+                    SO: removeCommas(element[3]),
+                    DistributorCode: removeCommas(element[4]),
+                    DistributorName: removeCommas(element[5]),
+                    RetailerCode: removeCommas(element[6]),
+                    RetailerName: removeCommas(element[7]),
+                    SalesManCode: removeCommas(element[8]),
+                    SalesManName: removeCommas(element[9]),
+                    SalesManEmpCode: removeCommas(element[10])
+
                 };
 
                 function removeCommas(value) {
@@ -265,7 +266,7 @@ const uploadData = async (req, res) => {
                                     }
                                     catch (error) {
                                         console.log(error)
-                                        return res.redirect('/data-whitelisting');
+                                        return res.redirect('/retailerwhitelisting');
                                     }
                                 } else {
                                     excelObject.status = 'Failure';
@@ -288,7 +289,7 @@ const uploadData = async (req, res) => {
                 }
                 catch (error) {
                     console.log(error)
-                    return res.redirect('/data-whitelisting');
+                    return res.redirect('/retailerwhitelisting');
                 }
             }
         } else {
@@ -312,9 +313,12 @@ const uploadData = async (req, res) => {
                     salesman_type: removeCommas(element[14]),
                     channel: removeCommas(element[15])
                 };
-
                 function removeCommas(value) {
-                    return value.replace(/,/g, '');
+                    if (typeof value === 'string') {
+                        return value.replace(/,/g, '');
+                    } else {
+                        return value;
+                    }
                 }
 
                 if (excelObject.salesman_type.trim() !== '') {
@@ -383,22 +387,18 @@ const uploadData = async (req, res) => {
         }
         try {
             const fields = [
-                { label: 'ASE Email Id', value: 'ase_email_id' },
-                { label: 'ASE Name', value: 'ase_name' },
-                { label: 'ASE Employee Code', value: 'ase_employee_code' },
-                { label: 'ASE State', value: 'ase_state' },
-                { label: 'ASE City', value: 'ase_city' },
-                { label: 'AW Name', value: 'aw_name' },
-                { label: 'AW Code', value: 'aw_code' },
-                { label: 'AW State', value: 'aw_state' },
-                { label: 'AW City', value: 'aw_city' },
-                { label: 'AWSM Name', value: 'awsm_name' },
-                { label: 'AWSM Code', value: 'awsm_code' },
-                { label: 'AWSM State', value: 'awsm_state' },
-                { label: 'AWSM City', value: 'awsm_city' },
-                { label: 'Region', value: 'region' },
-                { label: 'Status', value: 'status' },
-                { label: 'Reason', value: 'reason' }
+                { label: 'Region', value: 'Region' },
+                { label: 'RSM', value: 'RSM' },
+                { label: 'ASMAreaCode', value: 'ASMAreaCode' },
+                { label: 'SO', value: 'SO' },
+                { label: 'SO City', value: 'ase_city' },
+                { label: 'DistributorCode', value: 'DistributorCode' },
+                { label: 'DistributorName', value: 'DistributorName' },
+                { label: 'RetailerCode', value: 'RetailerCode' },
+                { label: 'RetailerName', value: 'RetailerName' },
+                { label: 'SalesManCode', value: 'SalesManCode' },
+                { label: 'SalesManName', value: 'SalesManName' },
+                { label: 'SalesManEmpCode', value: 'SalesManEmpCode' }
             ];
             const csv = json2csv(excelArray, { fields });
             const dynamicBasePath = '../../../src/public/upload_files/';
@@ -423,17 +423,17 @@ const uploadData = async (req, res) => {
                 channel: "GT",
             }
             // Upload Data into whitelisting_file_process
-            await insertIntoFileProcess(fileData);
-            return res.redirect('/data-whitelisting');
+            await insertIntoFileProcessretailerwhitelisting(fileData);
+            return res.redirect('/retailerwhitelisting');
         }
         catch (error) {
             console.log(error, "**********************catch error********************");
-            return res.redirect('/data-whitelisting');
+            return res.redirect('/retailerwhitelisting');
         }
     }
     catch (error) {
         console.log('Error', error);
-        return res.redirect('/data-whitelisting');
+        return res.redirect('/retailerwhitelisting');
     }
 }
 
@@ -444,7 +444,8 @@ const downloadSample = async (req, res) => {
             'Region',
             'RSM',
             'ASM Area Code',
-            'S.O Distributor Code',
+            'sales officer',
+            'Distributor Code',
             'Distributor Name',
             'Retailer Code',
             'Retailer Name',
@@ -460,21 +461,17 @@ const downloadSample = async (req, res) => {
 
         const data = [
             {
-                'ASE Email id': '',
-                'ASE Name': '',
-                'ASE Employee Code': '',
-                'ASE ASE State': '',
-                'ASE ASE City': '',
-                'AW Name': '',
-                'AW Code': '',
-                'AW State': '',
-                'AW City': '',
-                'AWSM Name': '',
-                'AWSM Code': '',
-                'AWSM State': '',
-                'AWSM City': '',
                 'Region': '',
-                'Salesman Tyep': ''
+                'RSM': '',
+                'ASMAreaCode': '',
+                'SO': '',
+                'DistributorCode': '',
+                'DistributorName': '',
+                'RetailerCode': '',
+                'RetailerName': '',
+                'SalesManCode': '',
+                'SalesManName': '',
+                'SalesManEmpCode': ''
             },
         ];
 
@@ -486,7 +483,7 @@ const downloadSample = async (req, res) => {
         res.end();
     } catch (error) {
         console.error('Error generating or serving the sample CSV:', error);
-        res.redirect('/data-whitelisting');
+        res.redirect('/retailerwhitelisting');
     }
 };
 
@@ -522,5 +519,6 @@ module.exports = {
     uploadData,
     downloadSample,
     UpdateStatus,
-    exportWhitelist
+    exportWhitelist,
+    insertIntoFileProcessretailerwhitelisting
 }

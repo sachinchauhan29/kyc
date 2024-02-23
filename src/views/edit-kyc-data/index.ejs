@@ -418,10 +418,6 @@
                                             class="header-contents-new">ADDRESS</li>
                                         <li style="width: 162px;padding: 17px 28px 28px 17px;"
                                             class="header-contents-new">DSR PHOTO</li>
-
-
-                                        <li style="width: 162px;padding: 17px 28px 19px 17px;"
-                                            class="header-contents-new">PHOTO ID</li>
                                         <li style="width: 162px;padding: 17px 28px 28px 17px;"
                                             class="header-contents-new">PAN CARD</li>
                                         <li style="width: 162px;padding: 17px 28px 20px 17px;"
@@ -539,45 +535,29 @@
                                                         class="form-control" value="<%= kyc.address %> " readonly="">
                                                 </li>
 
-                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new bg-yello wtabel-img">
-                                                    <div class="tabel-img" style="width: 100px; height: 50px;">
-                                                        <a id="imageLink" href="<%= kyc.photo %>">
-                                                            <img src="<%= kyc.photo %>" alt="Description of the image"
-                                                                width="100" height="50" font-size="50px"
-                                                                onclick="return false;">
-                                                        </a>
-                                                        <input type="hidden" value="<%= kyc.photo %>" name="photo">
-                                                    </div>
 
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new ">
+                                                    <a target="_blank">
+                                                        <img width="100" height="50" src="<%= kyc.photo %>"
+                                                            onclick="getImage(this);">
+                                                    </a>
+                                                    <input type="hidden" type="hidden" value="<%= kyc.photo %> "
+                                                        name="photo">
                                                 </li>
-
-
-
-
-
-
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new "><input type="text"
-                                                        name="bank_account_no" class="form-control"
-                                                        value="<%= kyc.bank_account_no %>" readonly="">
+                                                    class="header-contents-new ">
+                                                    <a target="_blank">
+                                                        <img width="100" height="50" src="<%= kyc.pancard_image %>"
+                                                            onclick="getImage(this);">
+                                                    </a>
+                                                    <input type="hidden" type="hidden" value="<%= kyc.pancard_image %> "
+                                                        name="pancard_image">
                                                 </li>
 
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new bg-yello wtabel-img">
-                                                    <div class="tabel-img" style="width: 100px; height: 50px;">
-                                                        <a id="imageLink" href="<%= kyc.photo %>">
-                                                            <img src="<%= kyc.photo %>" alt="Description of the image"
-                                                                width="100" height="50" font-size="50px"
-                                                                onclick="return false;">
-                                                        </a>
-                                                        <input type="hidden" value="<%= kyc.photo %>" name="photo">
-                                                    </div>
-                                                </li>
-                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new "><input type="text"
-                                                        name="bank_account_no" class="form-control"
-                                                        value="<%= kyc.bank_account_no %>" readonly="">
+                                                    class="header-contents-new "><input type="text" name="pancard_no"
+                                                        class="form-control" value="<%= kyc.pancard_no %>" readonly="">
                                                 </li>
 
 
@@ -852,19 +832,20 @@
             const headers = [
                 "CREATE DATE",
                 "KYC TYPE",
-                "ASE EMAIL ID",
-                "ASE CODE",
-                "ASE NAME",
-                "AW ID",
-                "AW NAME",
-                "SALESMAN ID",
-                "SALESMAN NAME",
-                "SALESMAN TYPE",
+                "SO EMAIL ID",
+                "SO CODE",
+                "SO NAME",
+                "DSR ID",
+                "DSR NAME",
+                "Distributor ID",
+                "Distributor NAME",
                 "BENEFICIARY NAME",
                 "STATE NAME",
                 "CITY NAME",
                 "ADDRESS",
-                "SALESMAN PHOTO",
+                "DSR PHOTO",
+                "PAN CARD",
+                "PAN CARD NO.",
                 "BANK A/C NO.",
                 "IFSC CODE",
                 "CHEQUE IMAGE",
@@ -883,19 +864,23 @@
                 return {
                     "CREATE DATE": item.created_on,
                     "KYC TYPE": item.kyc_type,
-                    "ASE EMAIL ID": item.ase_email,
-                    "ASE CODE": item.ase_employee_code,
-                    "ASE NAME": item.ase_name,
-                    "AW ID": item.aw_code,
-                    "AW NAME": item.aw_name,
-                    "SALESMAN ID": item.awsm_code,
-                    "SALESMAN NAME": item.awsm_name,
-                    "SALESMAN TYPE": item.salesman_type,
+                    "SO EMAIL ID": item.ase_email,
+                    "SO CODE": item.ase_employee_code,
+                    "SO NAME": item.ase_name,
+
+                    "Distributor ID": item.aw_code,
+                    "Distributor NAME": item.aw_name,
+                    "DSR ID": item.awsm_code,
+                    "DSR NAME": item.awsm_name,
+
                     "BENEFICIARY NAME": item.beneficiary_name,
                     "STATE NAME": item.awsm_state,
                     "CITY NAME": item.awsm_city,
                     "ADDRESS": item.address,
-                    "SALESMAN PHOTO": item.photo,
+                    "DSR PHOTO": item.photo,
+                    "PAN CARD": item.pancard_image,
+                    "PAN CARD NO.": item.pancard_no,
+
                     "BANK A/C NO.": item.bank_account_no,
                     "IFSC CODE": item.ifsc_code,
                     "CHEQUE IMAGE": item.bank_cheque,

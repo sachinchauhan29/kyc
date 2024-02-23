@@ -11,5 +11,5 @@ const router = express.Router();
 
 
 router.route('/').get(userAuth, getDetails, getNotification, retailerCtrl.retailerView);
-
+router.route('/export').get(userAuth, getDetails, retailerCtrl.exportKYCData);
 module.exports = router;

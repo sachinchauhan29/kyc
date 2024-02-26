@@ -67,7 +67,7 @@
                                         DSR KYC History</a>
                                     <a class="mt-2" href="./retailer-history">
                                         <img src="./images/on.png" alt="">
-                                        RETAILER History
+                                        RETAILER KYC History
                                     </a>
 
                                     <a class="mt-2" href="./master-data">
@@ -677,14 +677,14 @@
                                                         class="form-control" value="<%= data.channel %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="button" name=""
-                                                        class="form-control"
+                                                    class="header-contents-new">
+                                                    <input type="button" name="" class="form-control"
                                                         value="<%= (data.update_timestamp)? data.update_timestamp.toLocaleDateString('en-IN'): '' %>"
                                                         readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name=""
-                                                        class="form-control"
+                                                    class="header-contents-new">
+                                                    <input type="text" name="" class="form-control"
                                                         value="<%= (data.update_old_modification_date)? data.update_old_modification_date.toLocaleDateString('en-IN'): '' %>"
                                                         readonly="">
                                                 </li>

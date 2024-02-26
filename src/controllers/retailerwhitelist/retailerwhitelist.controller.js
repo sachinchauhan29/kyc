@@ -1,5 +1,5 @@
-const { totalEntries, selectDataWhitelisting, getTotalCount, UpdateWhiteList, selectASE, updateASE, insertASE, selectAW, updateAW, insertAW, selectAWSM, updateAWSM, insertAWSM, insertIntoFileProcess, updateIsActiveStatus, UpdateAWSMHistory, deleteAWSM, selectKYC, awsmDetailsHistory, updateKYCDetailHistory, updateKYCDetail, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, deleteKYCDetail, selectAUTH, updateAUTHDetailHistory, updateAUTHDetail } = require("../../models/data-whitelisting.model");
-const { retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting } = require("../../models/retailerwhitelisting.model");
+const { totalEntries, selectDataWhitelisting, getTotalCount, UpdateWhiteList, selectASE, updateASE, insertASE, selectAW, updateAW, insertAW, selectAWSM, updateAWSM, insertAWSM, insertIntoFileProcess, updateIsActiveStatus, UpdateAWSMHistory, deleteAWSM, selectKYC, awsmDetailsHistory, updateKYCDetail, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, deleteKYCDetail, selectAUTH, updateAUTHDetailHistory, updateAUTHDetail } = require("../../models/data-whitelisting.model");
+const { retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting, updateKYCDetailHistory } = require("../../models/retailerwhitelisting.model");
 const fs = require('fs');
 const json2csv = require('json2csv').parse;
 const moment = require('moment');
@@ -204,187 +204,187 @@ const uploadData = async (req, res) => {
         let excelArray = [];
 
 
-        if (req.query.action === 'delete-awsm') {
-            for (let i = 0; i < data.length; i++) {
-                const element = data[i];
-                let excelObject = {
-                    Region: removeCommas(element[0]),
-                    RSM: removeCommas(element[1]),
-                    ASMAreaCode: removeCommas(element[2]),
-                    SO: removeCommas(element[3]),
-                    DistributorCode: removeCommas(element[4]),
-                    DistributorName: removeCommas(element[5]),
-                    RetailerCode: removeCommas(element[6]),
-                    RetailerName: removeCommas(element[7]),
-                    SalesManCode: removeCommas(element[8]),
-                    SalesManName: removeCommas(element[9]),
-                    SalesManEmpCode: removeCommas(element[10])
+        // if (req.query.action === 'delete-awsm') {
+        //     for (let i = 0; i < data.length; i++) {
+        //         const element = data[i];
+        //         let excelObject = {
+        //             Region: removeCommas(element[0]),
+        //             RSM: removeCommas(element[1]),
+        //             ASMAreaCode: removeCommas(element[2]),
+        //             SO: removeCommas(element[3]),
+        //             DistributorCode: removeCommas(element[4]),
+        //             DistributorName: removeCommas(element[5]),
+        //             RetailerCode: removeCommas(element[6]),
+        //             RetailerName: removeCommas(element[7]),
+        //             SalesManCode: removeCommas(element[8]),
+        //             SalesManName: removeCommas(element[9]),
+        //             SalesManEmpCode: removeCommas(element[10])
 
-                };
+        //         };
 
-                function removeCommas(value) {
-                    return value.replace(/,/g, '');
-                }
+        //         function removeCommas(value) {
+        //             return value.replace(/,/g, '');
+        //         }
 
-                try {
-                    if (excelObject.salesman_type.trim() !== '') {
+        //         try {
+        //             if (excelObject.salesman_type.trim() !== '') {
 
-                        //Check ase exist or not 
-                        let aseExistResult = await selectASE(excelObject);
+        //                 //Check ase exist or not 
+        //                 let aseExistResult = await selectASE(excelObject);
 
-                        if (aseExistResult.length !== 0) {
+        //                 if (aseExistResult.length !== 0) {
 
-                            // Check AW exist or not 
-                            let awInsertResult = await selectAW(excelObject);
+        //                     // Check AW exist or not 
+        //                     let awInsertResult = await selectAW(excelObject);
 
-                            if (awInsertResult.length !== 0) {
+        //                     if (awInsertResult.length !== 0) {
 
-                                // Check AWSM exist or not
-                                let awsmInsertResult = await selectAWSM(excelObject);
+        //                         // Check AWSM exist or not
+        //                         let awsmInsertResult = await selectAWSM(excelObject);
 
-                                if (awsmInsertResult.length !== 0) {
-                                    try {
-                                        awsmInsertResult[0].reason = `Awsm Code-: ${awsmInsertResult[0].awsm_code} Deleted`;
+        //                         if (awsmInsertResult.length !== 0) {
+        //                             try {
+        //                                 awsmInsertResult[0].reason = `Awsm Code-: ${awsmInsertResult[0].awsm_code} Deleted`;
 
-                                        await UpdateAWSMHistory(awsmInsertResult[0]);
-                                        await deleteAWSM(excelObject);
+        //                                 await UpdateAWSMHistory(awsmInsertResult[0]);
+        //                                 await deleteAWSM(excelObject);
 
-                                        // Check KYC DETAILS exist or not for this awsm
-                                        let selectKYCResult = await selectKYC(excelObject);
-                                        if (selectKYCResult.length != 0) {
-                                            let selectAWSMHistory = await awsmDetailsHistory(excelObject.awsm_code);
+        //                                 // Check KYC DETAILS exist or not for this awsm
+        //                                 let selectKYCResult = await selectKYC(excelObject);
+        //                                 if (selectKYCResult.length != 0) {
+        //                                     let selectAWSMHistory = await awsmDetailsHistory(excelObject.awsm_code);
 
-                                            selectKYCResult[0].awsm_history_id = selectAWSMHistory[0].id;
-                                            selectKYCResult[0].reason = `Awsm Code-: ${selectKYCResult[0].awsm_code} Deleted`;
+        //                                     selectKYCResult[0].awsm_history_id = selectAWSMHistory[0].id;
+        //                                     selectKYCResult[0].reason = `Awsm Code-: ${selectKYCResult[0].awsm_code} Deleted`;
 
-                                            await updateKYCDetailHistory(selectKYCResult[0]);
-                                            await deleteKYCDetail(excelObject);
-                                        }
-                                        excelObject.status = 'Success';
-                                        excelObject.reason = 'NA';
-                                        success_count++;
-                                    }
-                                    catch (error) {
-                                        console.log(error)
-                                        return res.redirect('/retailerwhitelisting');
-                                    }
-                                } else {
-                                    excelObject.status = 'Failure';
-                                    excelObject.reason = 'AWSM NOT EXIST';
-                                    failure_count++;
-                                }
-                            }
-                            else {
-                                excelObject.status = 'Failure';
-                                excelObject.reason = 'AW NOT EXIST';
-                                failure_count++;
-                            }
-                        } else {
-                            excelObject.status = 'Failure';
-                            excelObject.reason = 'ASE NOT EXIST';
-                            failure_count++;
-                        }
-                        excelArray.push(excelObject)
-                    }
-                }
-                catch (error) {
-                    console.log(error)
-                    return res.redirect('/retailerwhitelisting');
-                }
-            }
-        } else {
-            for (let i = 0; i < data.length; i++) {
-                const element = data[i];
-                let excelObject = {
-                    ase_email_id: removeCommas(element[0]),
-                    ase_name: removeCommas(element[1]),
-                    ase_employee_code: removeCommas(element[2]),
-                    ase_state: removeCommas(element[3]),
-                    ase_city: removeCommas(element[4]),
-                    aw_name: removeCommas(element[5]),
-                    aw_code: removeCommas(element[6]),
-                    aw_state: removeCommas(element[7]),
-                    aw_city: removeCommas(element[8]),
-                    awsm_name: removeCommas(element[9]),
-                    awsm_code: removeCommas(element[10]),
-                    awsm_state: removeCommas(element[11]),
-                    awsm_city: removeCommas(element[12]),
-                    region: removeCommas(element[13]),
-                    salesman_type: removeCommas(element[14]),
-                    channel: removeCommas(element[15])
-                };
-                function removeCommas(value) {
-                    if (typeof value === 'string') {
-                        return value.replace(/,/g, '');
-                    } else {
-                        return value;
-                    }
-                }
+        //                                     await updateKYCDetailHistory(selectKYCResult[0]);
+        //                                     await deleteKYCDetail(excelObject);
+        //                                 }
+        //                                 excelObject.status = 'Success';
+        //                                 excelObject.reason = 'NA';
+        //                                 success_count++;
+        //                             }
+        //                             catch (error) {
+        //                                 console.log(error)
+        //                                 return res.redirect('/retailerwhitelisting');
+        //                             }
+        //                         } else {
+        //                             excelObject.status = 'Failure';
+        //                             excelObject.reason = 'AWSM NOT EXIST';
+        //                             failure_count++;
+        //                         }
+        //                     }
+        //                     else {
+        //                         excelObject.status = 'Failure';
+        //                         excelObject.reason = 'AW NOT EXIST';
+        //                         failure_count++;
+        //                     }
+        //                 } else {
+        //                     excelObject.status = 'Failure';
+        //                     excelObject.reason = 'ASE NOT EXIST';
+        //                     failure_count++;
+        //                 }
+        //                 excelArray.push(excelObject)
+        //             }
+        //         }
+        //         catch (error) {
+        //             console.log(error)
+        //             return res.redirect('/retailerwhitelisting');
+        //         }
+        //     }
+        // } else {
+        //     for (let i = 0; i < data.length; i++) {
+        //         const element = data[i];
+        //         let excelObject = {
+        //             ase_email_id: removeCommas(element[0]),
+        //             ase_name: removeCommas(element[1]),
+        //             ase_employee_code: removeCommas(element[2]),
+        //             ase_state: removeCommas(element[3]),
+        //             ase_city: removeCommas(element[4]),
+        //             aw_name: removeCommas(element[5]),
+        //             aw_code: removeCommas(element[6]),
+        //             aw_state: removeCommas(element[7]),
+        //             aw_city: removeCommas(element[8]),
+        //             awsm_name: removeCommas(element[9]),
+        //             awsm_code: removeCommas(element[10]),
+        //             awsm_state: removeCommas(element[11]),
+        //             awsm_city: removeCommas(element[12]),
+        //             region: removeCommas(element[13]),
+        //             salesman_type: removeCommas(element[14]),
+        //             channel: removeCommas(element[15])
+        //         };
+        //         function removeCommas(value) {
+        //             if (typeof value === 'string') {
+        //                 return value.replace(/,/g, '');
+        //             } else {
+        //                 return value;
+        //             }
+        //         }
 
-                if (excelObject.salesman_type.trim() !== '') {
-                    //Check ase exist or not 
-                    let aseExistResult = await selectASE(excelObject);
-                    let ASEEmail = '';
-                    if (aseExistResult.length == 0) {
-                        await insertASE(excelObject);
-                    } else {
-                        ASEEmail = aseExistResult[0].ase_email_id;
-                        await updateASE(excelObject);
-                    }
+        //         if (excelObject.salesman_type.trim() !== '') {
+        //             //Check ase exist or not 
+        //             let aseExistResult = await selectASE(excelObject);
+        //             let ASEEmail = '';
+        //             if (aseExistResult.length == 0) {
+        //                 await insertASE(excelObject);
+        //             } else {
+        //                 ASEEmail = aseExistResult[0].ase_email_id;
+        //                 await updateASE(excelObject);
+        //             }
 
-                    // Check AW exist or not 
-                    let awInsertResult = await selectAW(excelObject);
-                    if (awInsertResult.length == 0) {
-                        await insertAW(excelObject);
-                    } else {
-                        ASEEmail = awInsertResult[0].ase_email_id;
-                        await updateAW(excelObject);
-                    }
+        //             // Check AW exist or not 
+        //             let awInsertResult = await selectAW(excelObject);
+        //             if (awInsertResult.length == 0) {
+        //                 await insertAW(excelObject);
+        //             } else {
+        //                 ASEEmail = awInsertResult[0].ase_email_id;
+        //                 await updateAW(excelObject);
+        //             }
 
-                    // Check AWSM exist or not
-                    let awsmInsertResult = await selectAWSM(excelObject);
+        //             // Check AWSM exist or not
+        //             let awsmInsertResult = await selectAWSM(excelObject);
 
-                    if (awsmInsertResult.length == 0) {
-                        await insertAWSM(excelObject);
-                        excelObject.status = 'Success';
-                        excelObject.reason = 'NA';
-                        success_count++;
-                    } else {
-                        excelObject.reason = `Awsm Code-: ${awsmInsertResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email-: ${ASEEmail} replaced by : ${excelObject.ase_email_id}`;
-                        await UpdateAWSMHistory(excelObject);
-                        await updateAWSM(excelObject);
-
-
-                        // Check KYC DETAILS exist or not for this awsm
-                        let selectKYCResult = await selectKYC(excelObject);
-                        if (selectKYCResult.length != 0) {
-                            let selectAWSMHistory = await awsmDetailsHistory(excelObject.awsm_code);
-
-                            selectKYCResult[0].awsm_history_id = selectAWSMHistory[0].id;
-                            selectKYCResult[0].reason = `Awsm Code-: ${selectKYCResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email -: ${selectKYCResult[0].ase_email} replaced by : ${excelObject.ase_email_id}`;
-
-                            await updateKYCDetailHistory(selectKYCResult[0]);
-                            await updateKYCDetail(excelObject);
+        //             if (awsmInsertResult.length == 0) {
+        //                 await insertAWSM(excelObject);
+        //                 excelObject.status = 'Success';
+        //                 excelObject.reason = 'NA';
+        //                 success_count++;
+        //             } else {
+        //                 excelObject.reason = `Awsm Code-: ${awsmInsertResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email-: ${ASEEmail} replaced by : ${excelObject.ase_email_id}`;
+        //                 await UpdateAWSMHistory(excelObject);
+        //                 await updateAWSM(excelObject);
 
 
-                            //Check AUTH EXIST or not from kyc_authnetication_details
-                            let selectAuthResult = await selectAUTH(excelObject);
-                            if (selectAuthResult.length != 0) {
-                                selectAuthResult[0].reason = `Awsm Code-: ${selectAuthResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email -: ${selectAuthResult[0].ase_email} replaced by : ${excelObject.ase_email_id}`;
+        //                 // Check KYC DETAILS exist or not for this awsm
+        //                 let selectKYCResult = await selectKYC(excelObject);
+        //                 if (selectKYCResult.length != 0) {
+        //                     let selectAWSMHistory = await awsmDetailsHistory(excelObject.awsm_code);
 
-                                selectAuthResult[0].kyc_id = selectKYCResult[0].kyc_id;
-                                await updateAUTHDetailHistory(selectAuthResult[0]);
-                                await updateAUTHDetail(excelObject);
-                            }
-                        }
-                        excelObject.status = 'Failure';
-                        excelObject.reason = 'DUPLICATE DATA EXIST';
-                        failure_count++;
-                    }
-                    excelArray.push(excelObject);
-                }
-            }
-        }
+        //                     selectKYCResult[0].awsm_history_id = selectAWSMHistory[0].id;
+        //                     selectKYCResult[0].reason = `Awsm Code-: ${selectKYCResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email -: ${selectKYCResult[0].ase_email} replaced by : ${excelObject.ase_email_id}`;
+
+        //                     await updateKYCDetailHistory(selectKYCResult[0]);
+        //                     await updateKYCDetail(excelObject);
+
+
+        //                     //Check AUTH EXIST or not from kyc_authnetication_details
+        //                     let selectAuthResult = await selectAUTH(excelObject);
+        //                     if (selectAuthResult.length != 0) {
+        //                         selectAuthResult[0].reason = `Awsm Code-: ${selectAuthResult[0].awsm_code} replaced by : ${excelObject.awsm_code} && Awsm Name -: ${awsmInsertResult[0].awsm_name} replaced by : ${excelObject.awsm_name} && Awsm State-: ${awsmInsertResult[0].awsm_state} replaced by : ${excelObject.awsm_state} && Aw Code -: ${awsmInsertResult[0].aw_code} replaced by : ${excelObject.aw_code} && Awsm City-: ${awsmInsertResult[0].awsm_city} replaced by : ${excelObject.awsm_city} && Ase Email -: ${selectAuthResult[0].ase_email} replaced by : ${excelObject.ase_email_id}`;
+
+        //                         selectAuthResult[0].kyc_id = selectKYCResult[0].kyc_id;
+        //                         await updateAUTHDetailHistory(selectAuthResult[0]);
+        //                         await updateAUTHDetail(excelObject);
+        //                     }
+        //                 }
+        //                 excelObject.status = 'Failure';
+        //                 excelObject.reason = 'DUPLICATE DATA EXIST';
+        //                 failure_count++;
+        //             }
+        //             excelArray.push(excelObject);
+        //         }
+        //     }
+        // }
         try {
             const fields = [
                 { label: 'Region', value: 'Region' },

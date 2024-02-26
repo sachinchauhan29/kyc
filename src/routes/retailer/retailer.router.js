@@ -12,4 +12,6 @@ const router = express.Router();
 
 router.route('/').get(userAuth, getDetails, getNotification, retailerCtrl.retailerView);
 router.route('/export').get(userAuth, getDetails, retailerCtrl.exportKYCData);
+router.route('/update-status').post(userAuth, getDetails, retailerCtrl.updateKYCStatus);
+
 module.exports = router;

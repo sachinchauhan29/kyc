@@ -90,14 +90,14 @@
                 <form action="./dsr_attendance">
                   <div class="row">
                     <div class="col-3">
-                      <label for="salesman_id" class="mr-sm-2">DSR ID</label>
-                      <input type="text" class="form-control" id="awsm_code" placeholder="dsr_id" name="dsr_id"
-                        value="<%=QueryData.salesman_id %>" />
+                      <label for="dsr_id" class="mr-sm-2">DSR ID</label>
+                      <input type="text" class="form-control" id="dsr_id" placeholder="dsr_id" name="dsr_id"
+                        value="<%=QueryData.dsr_id %>" />
                     </div>
 
                     <div class="col-3">
                       <label for="salesman_name" class="mr-sm-2">DSR NAME</label>
-                      <input type="text" class="form-control" id="awsm_name" placeholder="dsr_name" name="dsr_name"
+                      <input type="text" class="form-control" id="dsr_name" placeholder="dsr_name" name="dsr_name"
                         value="<%=QueryData.salesman_name %>" />
                     </div>
                     <div class="col-3">
@@ -127,13 +127,9 @@
                 </form>
               </div>
 
-              <!-- <div class="dataTables_info" id="example_info" role="status" aria-live="polite">
-                Showing <%= Math.min((currentPage - 1) * 10 + 1, totalEntrie) %>
-                  to <%= Math.min(currentPage * 10, totalEntrie) %> of <%= totalEntrie %> entries
-              </div> -->
 
               <div class="table table-striped table-bordered table-responsive dataTable no-footer">
-                <table id="auth" class="table dataTables_wrapper table-bordered" cellspacing="0" width="100%">
+                <table id="example" class="table dataTables_wrapper table-bordered" cellspacing="0" width="100%">
                   <thead>
                     <tr>
                       <th class="tabel-width">DSR ID</th>
@@ -142,32 +138,7 @@
                       <th class="tabel-width">Attendance Status</th>
                       <th class="tabel-width">Tenure</th>
                     </tr>
-                    <!-- <tr>
-                                            <th class="tabel-width">CREATED ON</th>
-                                            <th class="tabel-width">SO EMAIL ID</th>
-                                            <th class="tabel-width">SO CODE</th>
-                                            <th class="tabel-width">SO NAME</th>
-                                            <th class="tabel-width">Distributor ID</th>
-                                            <th class="tabel-width">Distributor NAME</th>
-                                            <th class="tabel-width">DSR ID</th>
-                                            <th class="tabel-width">DSR NAME</th>
-                                            <th class="tabel-width">DSR TYPE</th>
-                                            <th class="tabel-width">VIKAS ID</th>
-                                            <th class="tabel-width">HQ LOCATION</th>
-                                            <th class="tabel-width">BENEFICIARY NAME</th>
-                                            <th class="tabel-width">STATE</th>
-                                            <th class="tabel-width">CITY</th>
-                                            <th class="tabel-width">ADDRESS</th>
-                                            <th class="tabel-width">BANK A/C NO.</th>
-                                            <th class="tabel-width">BANK NAME</th>
-                                            <th class="tabel-width">IFSC CODE</th>
-                                            <th class="tabel-width">MOBILE NO</th>
-                                            <th class="tabel-width">GENDER</th>
-                                            <th class="tabel-width">DOB</th>
-                                            <th class="tabel-width">CHANNEL TYPE</th>
-                                            <th class="tabel-width">BIOMETRIC</th>
-                                            <th class="tabel-width">KYC METHOD</th>
-                                        </tr> -->
+
                   </thead>
                   <tbody>
                     <% userResult11.forEach((data)=> { %>
@@ -192,22 +163,7 @@
                   </tbody>
                 </table>
               </div>
-              <!-- <div class="dataTables_paginate paging_simple_numbers mb-5" id="example_paginate">
-                <a href="/authentication?page=<%= currentPage - 1 %>"
-                  class="paginate_button previous <%= startPage === 1 ? 'disabled' : '' %>" aria-controls="example"
-                  data-dt-idx="0" tabindex="-1" id="example_previous">Previous</a>
-                <span>
-                  <% for (let i=startPage; i <=endPage; i++) { %>
-                    <a href="/authentication?page=<%=i%>" class="paginate_button current" aria-controls="example"
-                      data-dt-idx="<%=i %>" tabindex="0">
-                      <%= i %>
-                    </a>
-                    <% } %>
-                </span>
-                <a href="/authentication?page=<%= (parseInt(currentPage) + 1) %>"
-                  class="paginate_button next <%= endPage === totalRows ? 'disabled' : '' %>" aria-controls="example"
-                  id="example_next">Next</a>
-              </div> -->
+
             </div>
           </div>
         </div>
@@ -216,120 +172,35 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var table = document.querySelector("#example");
+    document.addEventListener('DOMContentLoaded', function () {
+      var table = document.querySelector('#example');
       var dataTable = new DataTable(table, {
-        dom: '<"dt-buttons"Bf><"clear">lirtp',
-        paging: true,
-        autoWidth: true,
-        buttons: [
-          {
-            extend: "excelHtml5",
-            text: "Excel",
-            filename: "DataTableExcel",
-            exportOptions: {
-              columns: ":visible",
-            },
-          },
-        ],
+
       });
     });
   </script>
-  <!-- <script>
-
-        function fnExcelReport(file) {
-
-            fetch(`/authentication/export`)
-                .then((res) => res.json())
-                .then((data) => {
-
-                    data.forEach((item) => {
-                        item.dob = formatDate(item.dob);
-                        item.created_on = formatDate(item.created_on);
-                        item.bank_account_no = formatBankAccount(item.bank_account_no);
-                    });
-
-                    const csvContent = createCSV(data);
-
-                    var element = document.createElement('a');
-                    element.setAttribute('href', 'data:csv;charset=utf-8, ' + encodeURIComponent(csvContent));
-                    element.setAttribute('download', file);
-
-                    document.body.appendChild(element);
-
-                    element.click();
-
-                    document.body.removeChild(element);
-                });
-        }
-
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        function formatBankAccount(accountNumber) {
-            return accountNumber.match(/.{1,4}/g).join(' ');
-        }
-
-        function createCSV(data) {
-            const replacer = (key, value) => value === null ? '' : value;
-            const header = Object.keys(data[0])
-            const csvContent = [
-                header.join(','),
-                ...data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-            ].join('\r\n');
-            return csvContent;
-        }
-
-
-        document.getElementById("btnExport")
-            .addEventListener("click", function () {
-                var filename = "authentication.csv";
-                fnExcelReport(filename);
-            }, false);
-
-    </script> -->
 
   <script>
-    function fnExcelReport(
-      file,
-      mobile_no,
-      awsm_code,
-      awsm_name,
-      salesman_type,
-      aw_code,
-      aw_name,
-      ase_code,
-      ase_name,
-      fromDate,
-      toDate,
-      awsm_state,
-      awsm_city
-    ) {
-      fetch(
-        `/authentication/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`
-      )
+
+    function fnExcelReport(file, mobileno,) {
+
+      fetch(`/dsr_attendance/export?mobileno=${mobileno}`)
         .then((res) => res.json())
         .then((data) => {
+
           data.forEach((item) => {
-            item.dob = formatDate(item.dob);
-            item.created_on = formatDate(item.created_on);
-            item.bank_account_no = formatBankAccount(item.bank_account_no);
+            // item.dob = formatDate(item.dob);
+            // item.created_on = formatDate(item.created_on);
+            item.insert_timestamp = formatDate(item.insert_timestamp);
+            // item.update_timestamp = formatDate(item.update_timestamp);
+            // item.bank_account_no = formatBankAccount(item.bank_account_no);
           });
 
           const csvContent = createCSV(data);
 
-          var element = document.createElement("a");
-          element.setAttribute(
-            "href",
-            "data:csv;charset=utf-8, " + encodeURIComponent(csvContent)
-          );
-          element.setAttribute("download", file);
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:csv;charset=utf-8, ' + encodeURIComponent(csvContent));
+          element.setAttribute('download', file);
 
           document.body.appendChild(element);
 
@@ -339,116 +210,49 @@
         });
     }
 
+
     function formatDate(dateString) {
       const date = new Date(dateString);
       const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     }
 
     function formatBankAccount(accountNumber) {
-      return accountNumber.match(/.{1,4}/g).join(" ");
+      return accountNumber.match(/.{1,4}/g).join(' ');
     }
 
     function createCSV(data) {
+
       const headers = [
-        "CREATED ON",
-        "ASE EMAIL ID",
-        "ASE CODE",
-        "ASE NAME",
-        "AW ID",
-        "AW NAME",
-        "SALESMAN ID",
-        "SALESMAN NAME",
-        "SALESMAN TYPE",
-        "VIKAS ID",
-        "HQ LOCATION",
-        "BENEFICIARY NAME",
-        "STATE",
-        "CITY",
-        "ADDRESS",
-        "BANK A/C NO.",
-        "BANK NAME",
-        "IFSC CODE",
-        "MOBILE NO",
-        "GENDER",
-        "DOB",
-        "CHANNEL TYPE",
-        "AUTHENTICATION",
-        "KYC METHOD",
-      ];
+        "DSR ID",
+        "DSR Name",
+        "Date",
+        "Attendance Status",
+        "Tenure"
+      ]
 
-      const flattenData = data.map((item) => ({
-        "CREATED ON": item.formatted_created_on,
-        "ASE EMAIL ID": item.ase_email,
-        "ASE CODE": item.ase_employee_code,
-        "ASE NAME": item.ase_name,
-        "AW ID": item.aw_code,
-        "AW NAME": item.aw_name,
-        "SALESMAN ID": item.awsm_code,
-        "SALESMAN NAME": item.awsm_name,
-        "SALESMAN TYPE": item.salesman_type,
-        "BENEFICIARY NAME": item.beneficiary_name,
-        STATE: item.awsm_state,
-        CITY: item.awsm_city,
-        ADDRESS: item.address,
-        "BANK A/C NO.": item.bank_account_no,
-        "BANK NAME": item.bank_name,
-        "IFSC CODE": item.ifsc_code,
-        "MOBILE NO": item.mobile_no,
-        GENDER: item.gender,
-        DOB: item.dob,
-        "CHANNEL TYPE": item.channel,
-        AUTHENTICATION: item.biometric_flag == 1 ? true : false,
-        "KYC METHOD": item.auth_methed,
+      const flattenData = data.map(item => ({
+        "DSR ID": item.dsr_id,
+        "DSR Name": item.dsr_name,
+        "Date": item.date,
+        "Attendance Status": item.attendance_status,
+        "Tenure": item.tenure,
       }));
-
       const replacer = (key, value) => (value === null ? "" : value);
-      const csvContent = [
-        headers.join(","),
-        ...flattenData.map((row) =>
-          headers
-            .map((fieldName) => JSON.stringify(row[fieldName], replacer))
-            .join(",")
-        ),
-      ].join("\r\n");
+      const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
       return csvContent;
+
     }
 
-    document.getElementById("btnExport").addEventListener(
-      "click",
-      function () {
-        var filename = "authentication.csv";
-        var mobile_no = document.getElementById("mobile_no").value;
-        var awsm_code = document.getElementById("awsm_code").value;
-        var awsm_name = document.getElementById("awsm_name").value;
-        var salesman_type = document.getElementById("salesman_type").value;
-        var aw_code = document.getElementById("aw_code").value;
-        var aw_name = document.getElementById("aw_name").value;
-        var ase_code = document.getElementById("ase_code").value;
-        var ase_name = document.getElementById("ase_name").value;
-        var fromDate = document.getElementById("fromDate").value;
-        var toDate = document.getElementById("toDate").value;
-        var awsm_state = document.getElementById("awsm_state").value;
-        var awsm_city = document.getElementById("awsm_city").value;
-        fnExcelReport(
-          filename,
-          mobile_no,
-          awsm_code,
-          awsm_name,
-          salesman_type,
-          aw_code,
-          aw_name,
-          ase_code,
-          ase_name,
-          fromDate,
-          toDate,
-          awsm_state,
-          awsm_city
-        );
-      },
-      false
-    );
+
+    document.getElementById("btnExport").addEventListener("click", function () {
+      var filename = "dsr_attendance.csv";
+      var dsr_id = document.getElementById("dsr_id").value;
+      var dsr_name = document.getElementById("dsr_name").value;
+      fnExcelReport(filename, dsr_id, dsr_name,);
+    }, false);
+
   </script>
   <%- include("../shared/footer"); %>

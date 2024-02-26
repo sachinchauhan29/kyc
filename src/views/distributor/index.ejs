@@ -150,13 +150,13 @@
 
                                     <div class="col-3">
                                         <label for="Mobile" class="mr-sm-2"> Mobile Number</label>
-                                        <input type="tel" maxlength="10" class="form-control" id="mobile_no"
+                                        <input type="tel" maxlength="10" class="form-control" id="mobileno"
                                             placeholder="Mobile" name="mobileno" value="<%=QueryData.mobileno %>">
                                     </div>
                                     <div class="col-3">
                                         <label for="Mobile" class="mr-sm-2">Enter Email id</label>
-                                        <input type="email" class="form-control" id="mobile_no"
-                                            placeholder="Enter Email id" name="email" value="<%=QueryData.email %>">
+                                        <input type="email" class="form-control" id="email" placeholder="Enter Email id"
+                                            name="email" value="<%=QueryData.email %>">
                                     </div>
 
                                     <div class="col-3">
@@ -259,5 +259,81 @@
 
             });
         });
+    </script>
+
+    <script>
+
+        function fnExcelReport(file, mobileno,) {
+
+            fetch(`/distributor/export?mobileno=${mobileno}`)
+                .then((res) => res.json())
+                .then((data) => {
+
+                    data.forEach((item) => {
+                        // item.dob = formatDate(item.dob);
+                        // item.created_on = formatDate(item.created_on);
+                        item.insert_timestamp = formatDate(item.insert_timestamp);
+                        // item.update_timestamp = formatDate(item.update_timestamp);
+                        // item.bank_account_no = formatBankAccount(item.bank_account_no);
+                    });
+
+                    const csvContent = createCSV(data);
+
+                    var element = document.createElement('a');
+                    element.setAttribute('href', 'data:csv;charset=utf-8, ' + encodeURIComponent(csvContent));
+                    element.setAttribute('download', file);
+
+                    document.body.appendChild(element);
+
+                    element.click();
+
+                    document.body.removeChild(element);
+                });
+        }
+
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function formatBankAccount(accountNumber) {
+            return accountNumber.match(/.{1,4}/g).join(' ');
+        }
+
+        function createCSV(data) {
+
+            const headers = [
+                "Mobile.No.",
+                "Email",
+                "Name",
+                "DistributorCode",
+                "status"
+            ]
+
+            const flattenData = data.map(item => ({
+                "Mobile.No.": item.mobileno,
+                "Email": item.email,
+                "Name": item.name,
+                "DistributorCode": item.distributorcode,
+                "status": item.status,
+            }));
+            const replacer = (key, value) => (value === null ? "" : value);
+            const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
+            return csvContent;
+
+        }
+
+
+        document.getElementById("btnExport").addEventListener("click", function () {
+            var filename = "distributor.csv";
+            var mobileno = document.getElementById("mobileno").value;
+            var email = document.getElementById("email").value;
+            fnExcelReport(filename, mobileno, email,);
+        }, false);
+
     </script>
     <%- include("../shared/footer"); %>

@@ -8,5 +8,5 @@ const router = express.Router();
 
 
 router.route('/').get(userAuth, getDetails, getNotification, dsr_attendance.attendanceView);
-
+router.route('/export').get(userAuth, getDetails, dsr_attendance.exportattendanceData);
 module.exports = router;

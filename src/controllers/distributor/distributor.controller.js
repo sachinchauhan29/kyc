@@ -1,16 +1,18 @@
-const { getAWSMCity } = require("../../models/kyc.model");
-const { updateNotification } = require("../../models/notification.model");
-const distributormodel = require("../../models/distributor.model");
+
+const { getfilterDistrubutorkyc } = require("../../models/distributor.model");
 const axios = require('axios');
 
 const distributorView = async (req, res) => {
-    let allDetails = await distributormodel.getfilterDistrubutorkyc(req.query);
-    console.log(req.query, ".......................................................");
-    let awsmCity = await getAWSMCity();
-    res.render('distributor', { user: res.userDetail, kycData: allDetails, userResult11: allDetails, QueryData: allDetails, awsmCity, notification: res.notification });
+    let allDetails = await getfilterDistrubutorkyc(req.query);
+
+    res.render('distributor', { user: res.userDetail, kycData: allDetails, userResult11: allDetails, QueryData: allDetails, notification: res.notification });
 }
 
-
+const exportKYCData = async (req, res) => {
+    let allDetailss = await getfilterDistrubutorkyc(req.query);
+  //  console.log('asdfge: exportKYCData', allDetailss);
+    res.send(allDetailss);
+}
 // const filterApply = async(req,res)=>{
 //     let allDetails = await distributormodel.getfilterDistrubutorkyc(req.body);
 //     let awsmCity = await getAWSMCity();
@@ -19,5 +21,6 @@ const distributorView = async (req, res) => {
 // }
 
 module.exports = {
-    distributorView
+    distributorView,
+    exportKYCData
 }

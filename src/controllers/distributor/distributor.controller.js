@@ -5,7 +5,7 @@ const axios = require('axios');
 const distributorView = async (req, res) => {
     let allDetails = await getfilterDistrubutorkyc(req.query);
 
-    res.render('distributor', { user: res.userDetail, kycData: allDetails, userResult11: allDetails, QueryData: allDetails, notification: res.notification });
+    res.render('distributor', { user: res.userDetail, kycData: allDetails, userResult11: allDetails, QueryData: req.query, notification: res.notification });
 }
 
 const exportKYCData = async (req, res) => {

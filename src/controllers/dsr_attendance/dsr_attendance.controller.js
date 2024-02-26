@@ -11,7 +11,7 @@ const attendanceView = async (req, res, next) => {
   let attendanceDetails = await getattendance(req.query);
 
 
-  res.render('dsr_attendance', { user: res.userDetail, attendanceDetails, userResult11: attendanceDetails, QueryData: attendanceDetails, notification: res.notification });
+  res.render('dsr_attendance', { user: res.userDetail, attendanceDetails, userResult11: attendanceDetails, QueryData: req.query, notification: res.notification });
 }
 const exportattendanceData = async (req, res) => {
   let allDetailss = await getattendance(req.query);

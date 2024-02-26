@@ -400,9 +400,12 @@
                                             class="header-contents-new">DSR ID</li>
                                         <li style="padding: 17px 20px 20px 17px;width: 162px;"
                                             class="header-contents-new">DSR NAME</li>
+                                        <li style="padding: 17px 20px 17px 17px;width: 162px;"
+                                            class="header-contents-new">DSR EMAIL</li>
+                                        <li style="padding: 17px 20px 17px 17px;width: 162px;"
+                                            class="header-contents-new">DSR TYPE</li>
 
-
-                                        <li style="width: 162px;padding: 17px 20px 20px 17px;"
+                                        <li style="width: 162px;padding: 17px 20px 18px 17px;"
                                             class="header-contents-new">Distributor ID</li>
                                         <li style="width: 162px;padding: 17px 18px 18px 17px;"
                                             class="header-contents-new">Distributor NAME</li>
@@ -460,6 +463,8 @@
                                             class="header-contents-new">KYC REJECTION REASON</li>
                                         <li style="padding: 37px 24px 36px 17px; width: 162px;"
                                             class="header-contents-new">REMARKS</li>
+                                        <li style="padding: 17px 17px 17px 17px; width: 162px;"
+                                            class="header-contents-new">Date of Joining</li>
                                     </ul>
                                 </div>
 
@@ -506,6 +511,15 @@
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name="awsm_name"
                                                         class="form-control" value="<%= kyc.awsm_name %>" readonly="">
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name="aw_code"
+                                                        class="form-control" value="" readonly="">
+                                                </li>
+
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name="SellerType"
+                                                        class="form-control" value="<%= kyc.SellerType %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name="aw_code"
@@ -723,6 +737,12 @@
 
                                                         </select>
                                                     </div>
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new">
+                                                    <input type="text" name="JoiningDate" class="form-control"
+                                                        value="<%= kyc.JoiningDate ? new Date(kyc.JoiningDate).toLocaleDateString('en-IN') : '' %>"
+                                                        readonly>
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text"

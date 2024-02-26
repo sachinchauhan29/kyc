@@ -182,9 +182,9 @@
 
   <script>
 
-    function fnExcelReport(file, mobileno,) {
+    function fnExcelReport(file, dsr_id, dsr_name) {
 
-      fetch(`/dsr_attendance/export?mobileno=${mobileno}`)
+      fetch(`/dsr_attendance/export?dsr_id=${dsr_id}&dsr_name=${dsr_name}`)
         .then((res) => res.json())
         .then((data) => {
 
@@ -251,7 +251,7 @@
       var filename = "dsr_attendance.csv";
       var dsr_id = document.getElementById("dsr_id").value;
       var dsr_name = document.getElementById("dsr_name").value;
-      fnExcelReport(filename, dsr_id, dsr_name,);
+      fnExcelReport(filename, dsr_id, dsr_name);
     }, false);
 
   </script>

@@ -1,4 +1,4 @@
-const { totalEntries, selectDataWhitelisting, getTotalCount, UpdateWhiteList, selectASE, updateASE, insertASE, selectAW, updateAW, insertAW, selectAWSM, updateAWSM, insertAWSM, insertIntoFileProcess, updateIsActiveStatus, UpdateAWSMHistory, deleteAWSM, selectKYC, awsmDetailsHistory, updateKYCDetail, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, deleteKYCDetail, selectAUTH, updateAUTHDetailHistory, updateAUTHDetail } = require("../../models/data-whitelisting.model");
+const { totalEntries, selectDataWhitelisting, getTotalCount, updateIsActiveStatus, awsmDetailsHistory, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, } = require("../../models/data-whitelisting.model");
 const { retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting, updateKYCDetailHistory } = require("../../models/retailerwhitelisting.model");
 const fs = require('fs');
 const json2csv = require('json2csv').parse;

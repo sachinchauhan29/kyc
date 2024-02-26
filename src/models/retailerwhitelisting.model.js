@@ -10,28 +10,28 @@ const retailer = async (data) => {
         query += ` AND RSM = '${data.RSM}'`;
     }
     if (data && data.ASMAreaCode) {
-        query += ` AND \`ASM Area Code\` = '${data.ASMAreaCode}'`;
+        query += ` AND \`ASMAreaCode\` = '${data.ASMAreaCode}'`;
     }
     if (data && data.SO) {
         query += ` AND \`SO\` = '${data.SO}'`;
     }
     if (data && data.DistributorCode) {
-        query += ` AND \`Distributor Code\` = '${data.DistributorCode}'`;
+        query += ` AND \`DistributorCode\` = '${data.DistributorCode}'`;
     }
     if (data && data.DistributorName) {
-        query += ` AND \`Distributor Name\` = '${data.DistributorName}'`;
+        query += ` AND \`DistributorName\` = '${data.DistributorName}'`;
     }
     if (data && data.RetailerCode) {
         query += ` AND RetailerCode = '${data.RetailerCode}'`;
     }
     if (data && data.RetailerName) {
-        query += ` AND RetailerName = '${data.RetailerName}'`;
+        query += ` AND \`RetailerName\` = '${data.RetailerName}'`;
     }
     if (data && data.SalesManCode) {
-        query += ` AND \`SalesMan Code\` = '${data.SalesManCode}'`;
+        query += ` AND \`SalesManCode\` = '${data.SalesManCode}'`;
     }
     if (data && data.SalesManName) {
-        query += ` AND \`SalesMan Name\` = '${data.SalesManName}'`;
+        query += ` AND \`SalesManName\` = '${data.SalesManName}'`;
     }
     if (data && data.toDate && data.fromDate) {
         query += ` AND created_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;

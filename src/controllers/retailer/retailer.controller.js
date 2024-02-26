@@ -1,6 +1,6 @@
-const { getAWSMCity } = require("../../models/kyc.model");
+
 const { updateNotification } = require("../../models/notification.model");
-const { getretailerkyc, CurrentUser, updateFreshKycStatus } = require('../../models/retailer_kyc.model');
+const { getretailerkyc, CurrentUser, updateFreshKycStatus, getAWSMCity } = require('../../models/retailer_kyc.model');
 const axios = require('axios');
 
 const retailerView = async (req, res) => {

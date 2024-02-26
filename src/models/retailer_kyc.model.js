@@ -29,10 +29,23 @@ const getretailerkyc = async (data) => {
   if (data.aw_code) {
     query += ` AND awsm_details.aw_code = '${data.aw_code}'`;
   }
-  if (data.toDate && data.fromDate) {
-    query += ` AND retailerkyc_details.create_date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
+  if (data.ase_name) {
+    query += ` AND ase_details.ase_name = '${data.ase_name}'`;
+  }
+  if (data.ase_code) {
+    query += ` AND ase_details.ase_employee_code = '${data.ase_code}'`;
   }
 
+  if (data.fromDate && data.toDate) {
+    query += ` AND DATE(retailerkyc_details.created_on) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
+  }
+  if (data.awsm_state) {
+    query += ` AND awsm_details.awsm_state = '${data.awsm_state}'`;
+  }
+  if (data.awsm_city) {
+    query += ` AND awsm_details.awsm_city = '${data.awsm_city}'`;
+  }
+  query += ` ORDER BY retailerkyc_details.created_on DESC`;
   // Add the LIMIT clause at the end of the query
   query += ` LIMIT 5`;
 
@@ -104,6 +117,20 @@ const updateReKycStatus = (data) => {
     });
   });
 }
+
+const getAWSMCity = () => {
+  let awsmCityQuery = 'SELECT awsm_city, COUNT(*) AS city_count FROM awsm_details GROUP BY awsm_city';
+
+  return new Promise((resolve, reject) => {
+    dbCon.query(awsmCityQuery, (error, result) => {
+      if (error) {
+        return reject(error);
+      } else {
+        return resolve(result);
+      }
+    });
+  });
+}
 // const getAllDistrubutorkyc = async()=>{
 //    let query = "select * from distributor_kyc";
 
@@ -133,4 +160,4 @@ const CurrentUser = async (email) => {
   });
 }
 
-module.exports = { getretailerkyc, updateKycStatus, CurrentUser, updateReplaceKycStatus, updateReKycStatus, updateFreshKycStatus }
+module.exports = { getretailerkyc, updateKycStatus, CurrentUser, updateReplaceKycStatus, updateReKycStatus, updateFreshKycStatus, getAWSMCity }

@@ -417,7 +417,10 @@
                                             class="header-contents-new">DSR ID</li>
                                         <li style="padding: 17px 18px 18px 17px;width: 162px;"
                                             class="header-contents-new">DSR NAME</li>
-
+                                        <li style="padding: 17px 20px 17px 17px;width: 162px;"
+                                            class="header-contents-new">DSR EMAIL</li>
+                                        <li style="padding: 17px 20px 17px 17px;width: 162px;"
+                                            class="header-contents-new">DSR TYPE</li>
 
                                         <li style="width: 162px;padding: 17px 18px 18px 17px;"
                                             class="header-contents-new">Distributor ID</li>
@@ -477,6 +480,8 @@
                                         <li style="padding: 17px 18px 18px 17px;width: 162px;"
                                             class="header-contents-new">NEW MODIFICATION DATE
                                         </li>
+                                        <li style="padding: 17px 17px 17px 17px; width: 162px;"
+                                            class="header-contents-new">Date of Joining</li>
                                     </ul>
 
                                 </div>
@@ -516,11 +521,20 @@
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.awsm_name %>" readonly="">
                                                 </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name="aw_code"
+                                                        class="form-control" value="" readonly="">
+                                                </li>
 
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new"><input type="text" name="SellerType"
+                                                        class="form-control" value="<%= data.SellerType %>" readonly="">
+                                                </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name="AWSM"
                                                         class="form-control" value="<%= data.aw_code %>" readonly="">
                                                 </li>
+
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.aw_name %>" readonly="">
@@ -678,11 +692,17 @@
                                                         value="<%= (data.update_timestamp)? data.update_timestamp.toLocaleDateString('en-IN'): '' %>"
                                                         readonly="">
                                                 </li>
-                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                <li style="width: 162px;padding: 7px 16px 20px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control"
                                                         value="<%= (data.update_old_modification_date)? data.update_old_modification_date.toLocaleDateString('en-IN'): '' %>"
                                                         readonly="">
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 8px 16px"
+                                                    class="header-contents-new">
+                                                    <input type="text" name="JoiningDate" class="form-control"
+                                                        value="<%= data.JoiningDate ? new Date(data.JoiningDate).toLocaleDateString('en-IN') : '' %>"
+                                                        readonly>
                                                 </li>
                                             </ul>
 

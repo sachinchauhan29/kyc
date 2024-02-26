@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="col-3">
                                         <label for="Mobile" class="mr-sm-2">Enter Email id</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter Email id"
+                                        <input type="email" class="form-control" id="Email" placeholder="Enter Email id"
                                             name="email" value="<%=QueryData.email %>">
                                     </div>
 
@@ -173,7 +173,6 @@
 
                                         <input type="date" class="form-control" id="toDate" placeholder="toDate"
                                             name="toDate" value="<%=QueryData.toDate %>">
-
                                     </div>
                                 </div>
                                 <div class="text-right mb-3">
@@ -181,14 +180,9 @@
                                         class="btn-shadow  btn btn-primary custom-btn  btn-lg mt-3">Reset</button>
                                     <button type="submit"
                                         class="btn-shadow  btn btn-primary custom-btn  btn-lg mt-3">Apply</button>
-
                                 </div>
-
                             </form>
-
                         </div>
-
-
                         <table id="example" class="table mt-2 table-striped table-bordered table-responsive"
                             cellspacing="0" width="100%">
                             <thead>
@@ -263,9 +257,9 @@
 
     <script>
 
-        function fnExcelReport(file, mobileno,) {
+        function fnExcelReport(file, mobileno, email) {
 
-            fetch(`/distributor/export?mobileno=${mobileno}`)
+            fetch(`/distributor/export?mobileno=${mobileno}&Email=${email}`)
                 .then((res) => res.json())
                 .then((data) => {
 
@@ -331,8 +325,8 @@
         document.getElementById("btnExport").addEventListener("click", function () {
             var filename = "distributor.csv";
             var mobileno = document.getElementById("mobileno").value;
-            var email = document.getElementById("email").value;
-            fnExcelReport(filename, mobileno, email,);
+            var email = document.getElementById("Email").value;
+            fnExcelReport(filename, mobileno, email);
         }, false);
 
     </script>

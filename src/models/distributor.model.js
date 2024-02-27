@@ -5,8 +5,8 @@ const dbCon = require('../config/db');
 const getfilterDistrubutorkyc = async (data) => {
 
   let query = "SELECT * FROM distributor_details WHERE 1=1 ";
-  if (data.mobileno) {
-    query += ` AND distributor_details.mobileno = '${data.mobileno}'`;
+  if (data.MobileNo) {
+    query += ` AND distributor_details.MobileNo = '${data.MobileNo}'`;
   }
   if (data.email) {
     query += ` AND distributor_details.email = '${data.email}'`;

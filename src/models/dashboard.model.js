@@ -12,7 +12,7 @@ const getattendance = async(data)=>{
     {
         query+=`AND dsr_attendance.date BETWEEN '${data.fromDate}' and '${data.toDate}'`;
     }
-    console.log(query,"..............",data);
+  //  console.log(query,"..............",data);
     return new Promise((resolve, reject) => {
         dbCon.query(query, (err, result) => {
           if (err) {

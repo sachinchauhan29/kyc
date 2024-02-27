@@ -135,7 +135,7 @@
   </div>
 </div> -->
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       <div class="card mt-3">
         <div class="card-header-tab card-header-tab-animation card-header">
           <div class="row">
@@ -154,7 +154,7 @@
           <div id="demo2" class="collapse">
             <form action="">
               <div class="row">
-                <div class="col-6">
+                <div class="col-4">
                   <label for="selectedMonth" class="mr-sm-2">Select Month</label>
                   <select class="form-control" id="selectedMonth">
                     <option value="">Choose</option>
@@ -172,7 +172,7 @@
                     <option value="december">December</option>
                   </select>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                   <label for="selectedRegion" class="mr-sm-2">Select Region</label>
                   <select class="form-control" id="selectedRegion">
                     <option value="Region">Region</option>
@@ -184,12 +184,27 @@
                     <option value="Region">SOUTH</option>
                   </select>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2"> DSR type</label>
+                  <select name="salesman_type" class="form-control" id="salesman_type" placeholder="salesman_type"
+                    value="">
+                    <option value=""> DSR type </option>
+                    <option value="Awsm">DSR</option>
+                    <option value="Sda">SDA</option>
+                    <option value="Psm">PSM</option>&gt;
+
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="SO" class="mr-sm-2">SO </label>
+                  <input type="text" class="form-control" id="SO" placeholder="SO NAME" name="SO" value="" />
+                </div>
+                <div class="col-4">
                   <label for="fromDate" class="mr-sm-2">FROM</label>
                   <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
                     value="<%=QueryData.fromDate %>" />
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                   <label for="toDate" class="mr-sm-2">TO</label>
                   <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
                     value="<%=QueryData.toDate %>" />
@@ -207,13 +222,13 @@
 
         <div class="row">
           <div class="col-10 mx-auto">
-            <canvas width="400" height="330" id="acquisitions1"> </canvas>
+            <canvas width="300" height="150" id="acquisitions1"> </canvas>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-6">
+    <div class="col-12">
       <div class="card mt-3">
         <div class="card-header-tab card-header-tab-animation card-header">
           <div class="row">
@@ -250,7 +265,42 @@
                     <option value="december">December</option>
                   </select>
                 </div>
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2">Select Region</label>
+                  <select class="form-control" id="selectedRegion">
+                    <option value="Region">Region</option>
+                    <option value="Region">North</option>
+                    <!-- <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
+                              %>>SDA</option> -->
+                    <option value="Region">EAST</option>
+                    <option value="Region">WEST</option>
+                    <option value="Region">SOUTH</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="SO" class="mr-sm-2"> Tenure </label>
+                  <input type="text" class="form-control" id="SO" placeholder="Tenure" name="Tenure" value="" />
+                </div>
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2"> DSR type</label>
+                  <select name="salesman_type" class="form-control" id="salesman_type" placeholder="salesman_type"
+                    value="">
+                    <option value=""> DSR type </option>
+                    <option value="Awsm">DSR</option>
+                    <option value="Sda">SDA</option>
+                    <option value="Psm">PSM</option>&gt;
 
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2"> status </label>
+                  <select name="salesman_type" class="form-control" id="salesman_type" placeholder="status" value="">
+                    <option value=""> select </option>
+                    <option value="Active"> Active</option>
+                    <option value="Inactive">Inactive</option>
+
+                  </select>
+                </div>
                 <div class="col-4">
                   <label for="fromDate" class="mr-sm-2">FROM</label>
                   <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
@@ -274,72 +324,85 @@
 
         <div class="row">
           <div class="col-10 mx-auto">
-            <canvas id="acquisitions2" width="400" height="300"></canvas>
+            <canvas id="acquisitions2" width="400" height="350"></canvas>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="card mt-3" style="width: 700px; margin: 0 auto">
-    <div class="card-header-tab card-header-tab-animation card-header">
-      <div class="row">
-        <div class="col-lg-8 col-md-8 col-12">
-          <h6><b>DSR attendance report</b></h6>
-        </div>
-
-        <div class="col-lg-4 col-lg-4 col-12 text-right">
-          <button class="btn-shadow btn btn-primary custom-btn btn-lg" data-toggle="collapse" data-target="#demo1">
-            <i class="fas fa-filter mr-2"></i>Filter
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <div id="demo1" class="collapse">
-        <form action="">
+    <div class="col-12">
+      <div class="card mt-3">
+        <div class="card-header-tab card-header-tab-animation card-header">
           <div class="row">
-            <div class="col-4">
-              <label for="selectedRegion" class="mr-sm-2">Select Region</label>
-              <select class="form-control" id="selectedRegion">
-                <option value="Region">Region</option>
-                <option value="Region">North</option>
-                <option value="Region">EAST</option>
-                <option value="Region">WEST</option>
-                <option value="Region">SOUTH</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <label for="FROM" class="mr-sm-2">FROM</label>
-
-              <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
-                value="<%=QueryData.fromDate %>" />
-            </div>
-            <div class="col-4">
-              <label for="TO" class="mr-sm-2">TO</label>
-
-              <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
-                value="<%=QueryData.toDate %>" />
+            <div class="col-lg-8 col-md-8 col-12">
+              <h6><b>DSR attendance report</b></h6>
             </div>
 
-            <div class="col-12 mb-3">
-              <a href="./dashboard" class="btn btn-outline-alternate custom-button reset-anchor mr-3 mt-3">Reset</a>
-              <button type="submit" class="btn-shadow btn btn-primary custom-btn btn-lg mt-3">
-                Apply
+            <div class="col-lg-4 col-lg-4 col-12 text-right">
+              <button class="btn-shadow btn btn-primary custom-btn btn-lg" data-toggle="collapse" data-target="#demo1">
+                <i class="fas fa-filter mr-2"></i>Filter
               </button>
             </div>
           </div>
-        </form>
-      </div>
-    </div>
+        </div>
+        <div class="card-body">
+          <div id="demo1" class="collapse">
+            <form action="">
+              <div class="row">
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2">Select Region</label>
+                  <select class="form-control" id="selectedRegion">
+                    <option value="Region">Region</option>
+                    <option value="Region">North</option>
+                    <option value="Region">EAST</option>
+                    <option value="Region">WEST</option>
+                    <option value="Region">SOUTH</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2">Select Region</label>
+                  <select class="form-control" id="selectedRegion">
+                    <option value="Region">Region</option>
+                    <option value="Region">North</option>
+                    <!-- <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
+                              %>>SDA</option> -->
+                    <option value="Region">EAST</option>
+                    <option value="Region">WEST</option>
+                    <option value="Region">SOUTH</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="FROM" class="mr-sm-2">FROM</label>
 
-    <div class="row">
-      <div class="col-12 mx-auto d-flex justify-content-center">
-        <canvas id="acquisitions" width="200px" height="80px"></canvas>
+                  <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
+                    value="<%=QueryData.fromDate %>" />
+                </div>
+                <div class="col-4">
+                  <label for="TO" class="mr-sm-2">TO</label>
+
+                  <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
+                    value="<%=QueryData.toDate %>" />
+                </div>
+
+                <div class="col-12 mb-3">
+                  <a href="./dashboard" class="btn btn-outline-alternate custom-button reset-anchor mr-3 mt-3">Reset</a>
+                  <button type="submit" class="btn-shadow btn btn-primary custom-btn btn-lg mt-3">
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 mx-auto d-flex justify-content-center">
+            <canvas id="acquisitions" width="200px" height="80px"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  </div>
+
   <script src="https://www.gstatic.com/charts/loader.js"></script>
 
 

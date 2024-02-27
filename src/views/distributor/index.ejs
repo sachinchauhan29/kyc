@@ -150,13 +150,13 @@
 
                                     <div class="col-3">
                                         <label for="Mobile" class="mr-sm-2"> Mobile Number</label>
-                                        <input type="tel" maxlength="10" class="form-control" id="mobileno"
-                                            placeholder="Mobile" name="mobileno" value="<%=QueryData.mobileno %>">
+                                        <input type="tel" maxlength="10" class="form-control" id="MobileNo"
+                                            placeholder="Mobile" name="MobileNo" value="<%=QueryData.MobileNo %>">
                                     </div>
                                     <div class="col-3">
                                         <label for="Mobile" class="mr-sm-2">Enter Email id</label>
                                         <input type="email" class="form-control" id="Email" placeholder="Enter Email id"
-                                            name="email" value="<%=QueryData.email %>">
+                                            name="Email" value="<%=QueryData.Email %>">
                                     </div>
 
                                     <div class="col-3">
@@ -199,10 +199,10 @@
                                 <% userResult11.forEach((data)=> { %>
                                     <tr>
                                         <td>
-                                            <%= data.mobileno %>
+                                            <%= data.MobileNo %>
                                         </td>
                                         <td>
-                                            <%= data.email %>
+                                            <%= data.Email %>
                                         </td>
                                         <td>
                                             <%= data.name %>
@@ -309,8 +309,8 @@
             ]
 
             const flattenData = data.map(item => ({
-                "Mobile.No.": item.mobileno,
-                "Email": item.email,
+                "Mobile.No.": item.MobileNo,
+                "Email": item.Email,
                 "Name": item.name,
                 "DistributorCode": item.distributorcode,
                 "status": item.status,
@@ -324,7 +324,7 @@
 
         document.getElementById("btnExport").addEventListener("click", function () {
             var filename = "distributor.csv";
-            var mobileno = document.getElementById("mobileno").value;
+            var mobileno = document.getElementById("MobileNo").value;
             var email = document.getElementById("Email").value;
             fnExcelReport(filename, mobileno, email);
         }, false);

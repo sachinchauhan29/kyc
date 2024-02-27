@@ -5,16 +5,16 @@ const connection = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "m_kyc12",
+  database: "mars_kyc12",
 });
 
 
 
 // const connection = mysql.createPool({
-//   host: "13.234.166.225",
+//   host: "3.111.163.115",
 //   user: "root",
-//   password: "Test@123root",
-//   database: "kyc",
+//   password: "anuj@3112",
+//   database: "mars_kyc",
 // });
 
 

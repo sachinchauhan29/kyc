@@ -93,18 +93,18 @@
                                     <div class="col-2">
                                         <label for="Mobile" class="mr-sm-2">SO Name</label>
                                         <input type="tel" maxlength="10" class="form-control" id="mobile_no"
-                                            placeholder="SO Name" name="Mobile" value="<%=QueryData.Mobile %>">
+                                            placeholder="SO Name" name="so_name" value="<%=QueryData.so_name %>">
                                     </div>
                                     <div class="col-2">
-                                        <label for="salesman_id" class="mr-sm-2">DSR Code </label>
+                                        <label for="dsr_code" class="mr-sm-2">DSR Code </label>
                                         <input type="text" class="form-control" id="awsm_code" placeholder="DSR Code"
-                                            name="salesman_id" value="<%=QueryData.salesman_id %>">
+                                            name="dsr_code" value="<%=QueryData.dsr_code %>">
                                     </div>
-                                    <div class="col-2">
+                                    <!-- <div class="col-2">
                                         <label for="salesman_name" class="mr-sm-2">DSR Name </label>
                                         <input type="text" class="form-control" id="awsm_name" placeholder="DSR Name"
                                             name="salesman_name" value="<%=QueryData.salesman_name %>">
-                                    </div>
+                                    </div> -->
 
 
                                     <div class="col-2">
@@ -112,15 +112,15 @@
                                         <label for="AW-ID" class="mr-sm-2">Distributor Name </label>
 
                                         <input type="text" class="form-control" id="aw_code"
-                                            placeholder="Distributor Name" name="aw_code"
-                                            value="<%=QueryData.aw_code %>">
+                                            placeholder="Distributor Name" name="distributor_name"
+                                            value="<%=QueryData.distributor_name %>">
                                     </div>
 
                                     <div class="col-2">
                                         <label for="AW-NAME" class="mr-sm-2">Distributor Code </label>
                                         <input type="text" class="form-control" id="aw_name"
-                                            placeholder="Distributor Code" name="aw_name"
-                                            value="<%=QueryData.aw_name %>">
+                                            placeholder="Distributor Code" name="distributor_code"
+                                            value="<%=QueryData.distributor_code %>">
 
                                     </div>
 
@@ -131,8 +131,8 @@
                                         <label for="ASE-CODE" class="mr-sm-2">Salary Payout </label>
 
                                         <input type="text" class="form-control" id="ase_code"
-                                            placeholder="Salary Payout" name="ase_code"
-                                            value="<%=QueryData.ase_code %>">
+                                            placeholder="Salary Payout" name="salary_payout"
+                                            value="<%=QueryData.salary_payout %>">
 
                                     </div>
 
@@ -141,8 +141,8 @@
                                         <label for="ASE-NAME" class="mr-sm-2">Incentive Payout </label>
 
                                         <input type="text" class="form-control" id="ase_name"
-                                            placeholder="Incentive Payout	" name="ase_name"
-                                            value="<%=QueryData.ase_name %>">
+                                            placeholder="Incentive Payout	" name="incentive_payout"
+                                            value="<%=QueryData.incentive_payout %>">
 
                                     </div>
 
@@ -184,7 +184,6 @@
                                         <tr>
                                             <th class="tabel-width">SO Name </th>
                                             <th class="tabel-width">DSR Code </th>
-                                            <th class="tabel-width">DSR Code </th>
                                             <th class="tabel-width">Distributor NAME</th>
                                             <th class="tabel-width">Distributor Code </th>
                                             <th class="tabel-width">Salary Payout </th>
@@ -195,83 +194,30 @@
                                     </thead>
 
                                     <tbody>
-                                        <!-- <% payout.forEach((data)=> {%>
+                                        <% payout.forEach((data)=> {%>
                                             <tr>
                                                 <td>
-                                                    <%= data.ase_email %>
+                                                    <%= data.so_name %>
                                                 </td>
                                                 <td>
-                                                    <%= data.ase_id %>
+                                                    <%= data.dsr_code %>
                                                 </td>
                                                 <td>
-                                                    <%= data.ase_name %>
+                                                    <%= data.distributor_name %>
                                                 </td>
                                                 <td>
-                                                    <%= data.aw_code %>
+                                                    <%= data.distributor_code %>
                                                 </td>
                                                 <td>
-                                                    <%= data.aw_name %>
+                                                    <%= data.salary_payout %>
                                                 </td>
                                                 <td>
-                                                    <%= data.awsm_code %>
-                                                </td>
-                                                <td>
-                                                    <%= data.awsm_name %>
-                                                </td>
-                                                <td>
-                                                    <%= data.salesman_type %>
-                                                </td>
-                                                <td>???</td>
-                                                <td>
-                                                    <%= data.hq_location %>
-                                                </td>
-                                                <td>
-                                                    <%= data.awsm_state %>
-                                                </td>
-                                                <td>
-                                                    <%= data.awsm_city %>
-                                                </td>
-                                                <td>
-                                                    <%= data.beneficiary_name %>
-                                                </td>
-                                                <td>
-                                                    <%= data.address %>
-                                                </td>
-                                                <td>
-                                                    <%= data.bank_account_no %>
-                                                </td>
-                                                <td>
-                                                    <%= data.bank_name %>
-                                                </td>
-                                                <td>
-                                                    <%= data.ifsc_code %>
-                                                </td>
-                                                <td>
-                                                    <%= data.mobile_no %>
+                                                    <%= data.incentive_payout %>
                                                 </td>
                                                 <td>
                                                     <%= data.payout_month %>
                                                 </td>
-                                                <td>
-                                                    <%= data.payout_amount %>
-                                                </td>
-                                                <td>
-                                                    <p class="ACTIVE">
-                                                        <%= data.payment_status %>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <%= data.utr_no %>
-                                                </td>
-                                                <td>
-                                                    <%= data.channel %>
-                                                </td>
-                                                <td>
-                                                    <%= (data.created_on)?
-                                                        data.created_on.toLocaleDateString('en-IN'):'' %>
-                                                </td>
-                                            </tr>
-                                            <%}) ; %> -->
+                                                <%}) ; %>
                                     </tbody>
 
                                 </table>
@@ -305,17 +251,17 @@
 
 
     <script>
-        function fnExcelReport(file, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate) {
+        function fnExcelReport(file, so_name) {
 
-            fetch(`/payout/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}`)
+            fetch(`/payout/export?so_name=${so_name}`)
                 .then((res) => res.json())
                 .then((data) => {
                     data.forEach((item) => {
-                        item.dob = formatDate(item.dob);
-                        item.created_on = formatDate(item.created_on);
+                        // item.dob = formatDate(item.dob);
+                        // item.created_on = formatDate(item.created_on);
                         item.insert_timestamp = formatDate(item.insert_timestamp);
-                        item.update_timestamp = formatDate(item.update_timestamp);
-                        item.bank_account_no = formatBankAccount(item.bank_account_no);
+                        // item.update_timestamp = formatDate(item.update_timestamp);
+                        // item.bank_account_no = formatBankAccount(item.bank_account_no);
                     });
 
                     const csvContent = createCSV(data);
@@ -340,34 +286,49 @@
             return `${year}-${month}-${day}`;
         }
 
-        function formatBankAccount(accountNumber) {
-            return accountNumber.match(/.{1,4}/g).join(' ');
+        function createCSV(data) {
+
+            const headers = [
+                "SO Name",
+                "DSR Code",
+                "Distributor NAME",
+                "Distributor Code",
+                "Salary Payout",
+                "Incentive Payout",
+                "Payout Month"
+            ]
+
+            const flattenData = data.map(item => ({
+                "SO Name": item.so_name,
+                "DSR Code": item.dsr_code,
+                "Distributor NAME": item.distributor_name,
+                "Distributor Code": item.distributor_code,
+                "Salary Payout": item.salary_payout,
+                "Incentive Payout": item.incentive_payout,
+                "Payout Month": item.payout_month
+            }));
+            const replacer = (key, value) => (value === null ? "" : value);
+            const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
+            return csvContent;
+
         }
 
-        function createCSV(data) {
-            const replacer = (key, value) => value === null ? '' : value;
-            const header = Object.keys(data[0])
-            const csvContent = [
-                header.join(','),
-                ...data.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','))
-            ].join('\r\n');
-            return csvContent;
-        }
+
+
 
         document.getElementById("btnExport")
             .addEventListener("click", function () {
                 var filename = "payout.csv";
                 var mobile_no = document.getElementById("mobile_no").value;
                 var awsm_code = document.getElementById("awsm_code").value;
-                var awsm_name = document.getElementById("awsm_name").value;
-                var salesman_type = document.getElementById("salesman_type").value;
+                // var awsm_name = document.getElementById("awsm_name").value;
                 var aw_code = document.getElementById("aw_code").value;
                 var aw_name = document.getElementById("aw_name").value;
                 var ase_code = document.getElementById("ase_code").value;
                 var ase_name = document.getElementById("ase_name").value;
                 var fromDate = document.getElementById("fromDate").value;
                 var toDate = document.getElementById("toDate").value;
-                fnExcelReport(filename, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate);
+                fnExcelReport(filename, mobile_no, awsm_code, aw_code, aw_name, ase_code, ase_name, fromDate, toDate);
             }, false);
     </script>
 

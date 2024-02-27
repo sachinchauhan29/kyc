@@ -17,8 +17,8 @@ const dashboardBackView = async (req, res, next) => {
     return element.attendance_status === "Present";
   });
   
-   console.log(present.length,totalData,"..........................................");
-    console.log(res.notification);
+  //  console.log(present.length,totalData,"..........................................");
+  //   console.log(res.notification);
     res.render('dashboard',{ user: res.userDetail, notification: res.notification, QueryData: dashboardDetails,absent:absent.length,present:present.length,total:totalData.length});
 
 }

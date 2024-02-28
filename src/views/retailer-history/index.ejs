@@ -140,7 +140,7 @@
 
                                     </div>
 
-                                    <div class="col-2">
+                                    <!-- <div class="col-2">
 
                                         <div class="ms-auto">
 
@@ -149,7 +149,7 @@
                                             <select name="salesman_type" class="form-control" id="salesman_type"
                                                 placeholder="salesman_type" value="<%=QueryData.salesman_type %>">
 
-                                                <option value=""> KYC Type </option>
+                                                <option value=""> KYC type </option>
                                                 <option value="Awsm" <%=QueryData.salesman_type==='Awsm' ? 'selected'
                                                     : '' %>>DSR</option>
                                                 <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
@@ -161,7 +161,7 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-2">
 
@@ -184,7 +184,7 @@
 
 
 
-                                    <div class="col-2 mt-2">
+                                    <div class="col-2 ">
 
                                         <label for="ASE-CODE" class="mr-sm-2">SO CODE</label>
 
@@ -536,11 +536,11 @@
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
-                                                        class="form-control" value="<%= data.awsm_state %>" readonly="">
+                                                        class="form-control" value="<%= data.state %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
-                                                        class="form-control" value="<%= data.awsm_city %>" readonly="">
+                                                        class="form-control" value="<%= data.city %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
@@ -735,9 +735,9 @@
         }
     </script>
     <script>
-        function fnExcelReport(file, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city) {
+        function fnExcelReport(file, mobile_no, awsm_code, awsm_name, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, state, city) {
 
-            fetch(`/retailer-history/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`)
+            fetch(`/retailer-history/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&state=${state}&city=${city}`)
                 .then((res) => res.json())
                 .then((data) => {
                     data.forEach((item) => {
@@ -822,7 +822,7 @@
             ];
 
             function dateFun(item) {
-                console.log(item);
+               // console.log(item);
                 switch (item.kyc_type) {
                     case 'FRESH':
                         return item.approved_on;
@@ -836,7 +836,7 @@
                         return null;
                 }
             }
-            console.log(data[0]);
+            //console.log(data[0]);
             const flattenData = data.map(item => ({
                 "CREATE DATE": item.created_on,
                 "KYC TYPE": item.kyc_type,
@@ -848,28 +848,28 @@
                 "Distributor ID": item.aw_code,
                 "Distributor NAME": item.aw_name,
                 "BENEFICIARY NAME": item.beneficiary_name,
-                "STATE NAME": item.awsm_state,
-                "CITY NAME": item.awsm_city,
+                "STATE NAME": item.state,
+                "CITY NAME": item.city,
                 "ADDRESS": item.address,
                 "RETAILER PHOTO": item.photo,
                 "PAN PHOTO": item.pancard_image,
                 "PAN Card No.": item.pancard_no,
                 "BANK A/C NO.": item.bank_account_no,
                 "IFSC CODE": item.ifsc_code,
-                "CHEQUE IMAGE": item.cheque_image,
+                "CHEQUE IMAGE": item.bank_cheque,
                 "BANK NAME": item.bank_name,
-                "PHOTO ID IMAGE": item.photo_id_image,
+                "PHOTO ID IMAGE": item.photo_id,
                 "MOBILE NO": item.mobile_no,
                 "CALLING COUNT": item.calling_count,
                 "CALLING STATUS": item.calling_status,
                 "VALIDATION CALLING REMARK": item.validation_calling_remark,
-                "KYC STATUS": item.kyc_status,
+                "KYC STATUS": item.status,
                 "KYC REJECTION REASON": item.kyc_rejection_reason,
-                "REMARKS": item.remarks,
+                "REMARKS": item.approved_comment,
                 "VERIFICATION DATE": dateFun(item),
                 "GENDER": item.gender,
                 "DOB": item.dob,
-                "CHANNEL TYPE": item.channel_type,
+                "CHANNEL TYPE": item.SellerType,
                 "MODIFICATION DATE": item.modification_date,
                 "NEW MODIFICATION DATE": item.new_modification_date
             }));
@@ -895,7 +895,7 @@
                 var mobile_no = document.getElementById("mobile_no").value;
                 var awsm_code = document.getElementById("awsm_code").value;
                 var awsm_name = document.getElementById("awsm_name").value;
-                var salesman_type = document.getElementById("salesman_type").value;
+                // var salesman_type = document.getElementById("salesman_type").value;
                 var aw_code = document.getElementById("aw_code").value;
                 var aw_name = document.getElementById("aw_name").value;
                 var ase_code = document.getElementById("ase_code").value;
@@ -904,7 +904,7 @@
                 var toDate = document.getElementById("toDate").value;
                 var awsm_state = document.getElementById("awsm_state").value;
                 var awsm_city = document.getElementById("awsm_city").value;
-                fnExcelReport(filename, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city);
+                fnExcelReport(filename, mobile_no, awsm_code, awsm_name, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city);
             }, false);
     </script>
 

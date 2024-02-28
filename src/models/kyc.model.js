@@ -21,7 +21,7 @@ const selectKycData = async (data) => {
     query += ` AND awsm_details.awsm_name = '${data.awsm_name}'`;
   }
   if (data.salesman_type) {
-    query += ` AND awsm_details.salesman_type = '${data.salesman_type}'`;
+    query += ` AND kyc_details.SellerType = '${data.salesman_type}'`;
   }
   if (data.aw_code) {
     query += ` AND kyc_details.aw_code = '${data.aw_code}'`;
@@ -38,11 +38,11 @@ const selectKycData = async (data) => {
   if (data.fromDate && data.toDate) {
     query += ` AND DATE(kyc_details.created_on) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
   }
-  if (data.awsm_state) {
-    query += ` AND awsm_details.awsm_state = '${data.awsm_state}'`;
+  if (data.state) {
+    query += ` AND awsm_details.awsm_state = '${data.state}'`;
   }
-  if (data.awsm_city) {
-    query += ` AND awsm_details.awsm_city = '${data.awsm_city}'`;
+  if (data.city) {
+    query += ` AND awsm_details.awsm_city = '${data.city}'`;
   }
   query += ` ORDER BY kyc_details.created_on DESC`;
 
@@ -87,8 +87,9 @@ const filterKycData = async (data) => {
     query += ` AND awsm_details.awsm_name = '${data.salesman_name}'`;
   }
   if (data.salesman_type) {
-    query += ` AND awsm_details.salesman_type = '${data.salesman_type}'`;
+    query += ` AND kyc_details.SellerType = '${data.salesman_type}'`;
   }
+
   if (data.aw_code) {
     query += ` AND kyc_details.aw_code = '${data.aw_code}'`;
   }

@@ -3,7 +3,8 @@ const dbCon = require('../config/db');
 
 const selectKYCHistory = async (data) => {
   // let query = `select kyc_details_history.*, awsm_details.*, aw_details.*, ase_details.* from kyc_details_history INNER JOIN awsm_details on awsm_details.awsm_code=kyc_details_history.awsm_code INNER JOIN aw_details on kyc_details_history.aw_code = aw_details.aw_code INNER JOIN ase_details on kyc_details_history.ase_email = ase_details.ase_email_id where 1 = 1 AND kyc_type != 'FRESH'`;
-  let query = `select kyc_details.created_on, kyc_details.kyc_type, kyc_details.ase_email, kyc_details.aw_code, kyc_details.awsm_code, kyc_details.bank_account_no, kyc_details.ifsc_code, kyc_details.address, kyc_details.bank_cheque, kyc_details.bank_name, kyc_details.photo, kyc_details.beneficiary_name, kyc_details.photo_id, kyc_details.mobile_no, kyc_details.calling_count, kyc_details.calling_status, kyc_details.calling_remarks, kyc_details.status, kyc_details.wip_remarks, kyc_details.approved_comment, kyc_details.approved_on, kyc_details.gender, kyc_details.dob, kyc_details.update_timestamp, kyc_details.update_old_modification_date, kyc_details.re_kyc_edit_on, kyc_details.replace_kyc_edit_on ,kyc_details.approved_kyc_edit_on ,  awsm_details.channel, awsm_details.awsm_name, awsm_details.salesman_type, awsm_details.awsm_city, awsm_details.awsm_state,  aw_details.aw_name, ase_details.ase_employee_code, ase_details.ase_name from kyc_details INNER JOIN awsm_details on awsm_details.awsm_code=kyc_details.awsm_code INNER JOIN aw_details on aw_details.aw_code = kyc_details.aw_code INNER JOIN ase_details on ase_details.ase_email_id = kyc_details.ase_email where 1 = 1 AND kyc_details.status != 'PENDING'`;
+  let query = `select  kyc_details.*, kyc_details.created_on,kyc_details.SellerType,kyc_details.pancard_no,kyc_details.pancard_image,kyc_details.JoiningDate,kyc_details.update_old_modification_date, kyc_details.kyc_type, kyc_details.ase_email, kyc_details.aw_code, kyc_details.awsm_code, kyc_details.bank_account_no, kyc_details.ifsc_code, kyc_details.address, kyc_details.bank_cheque, kyc_details.bank_name, kyc_details.photo, kyc_details.beneficiary_name, kyc_details.photo_id, kyc_details.mobile_no, kyc_details.calling_count, kyc_details.calling_status, kyc_details.calling_remarks, kyc_details.status, kyc_details.wip_remarks, kyc_details.approved_comment, kyc_details.approved_on, kyc_details.gender, kyc_details.dob, kyc_details.update_timestamp, kyc_details.update_old_modification_date, kyc_details.re_kyc_edit_on, kyc_details.replace_kyc_edit_on ,kyc_details.approved_kyc_edit_on ,  awsm_details.channel, awsm_details.awsm_name, awsm_details.salesman_type, awsm_details.awsm_city, awsm_details.awsm_state,  aw_details.aw_name, ase_details.ase_employee_code, ase_details.ase_name from kyc_details INNER JOIN awsm_details on awsm_details.awsm_code=kyc_details.awsm_code INNER JOIN aw_details on aw_details.aw_code = kyc_details.aw_code INNER JOIN ase_details on ase_details.ase_email_id = kyc_details.ase_email where 1 = 1 AND kyc_details.status != 'PENDING'`;
+
 
   if (data.Mobile) {
     query += ` AND kyc_details.mobile_no = '${data.Mobile}'`;
@@ -15,7 +16,7 @@ const selectKYCHistory = async (data) => {
     query += ` AND awsm_details.awsm_name = '${data.salesman_name}'`;
   }
   if (data.salesman_type) {
-    query += ` AND awsm_details.salesman_type = '${data.salesman_type}'`;
+    query += ` AND kyc_details.SellerType = '${data.salesman_type}'`;
   }
   if (data.aw_code) {
     query += ` AND kyc_details.aw_code = '${data.aw_code}'`;

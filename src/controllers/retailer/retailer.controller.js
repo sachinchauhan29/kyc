@@ -1,13 +1,13 @@
 
 const { updateNotification } = require("../../models/notification.model");
-const { getretailerkyc, CurrentUser, updateFreshKycStatus, getAWSMCity } = require('../../models/retailer_kyc.model');
+const { getretailerkyc, CurrentUser, updateReKycStatus, updateFreshKycStatus, getAWSMCity } = require('../../models/retailer_kyc.model');
 const axios = require('axios');
 
 const retailerView = async (req, res) => {
     let allDetails = await getretailerkyc(req.query);
     // console.log(allDetails, "............................................................");
     let awsmCity = await getAWSMCity();
-    res.render('retailer', { user: res.userDetail, kycData: allDetails, QueryData: allDetails, awsmCity, notification: res.notification });
+    res.render('retailer', { user: res.userDetail, kycData: allDetails, QueryData: req.query, awsmCity, notification: res.notification });
 
 
 }
@@ -35,42 +35,42 @@ const updateKYCStatus = async (req, res) => {
                 req.body.kyc_type = 'RE-KYC';
             }
 
-            const apiUrl = 'https://arteriacp.apimanagement.ap1.hana.ondemand.com/crazibrain/ss/v1/spkyc/AGGRBRIT'
-            const postData = {
-                name: req.body.awsm_name,
-                address1: req.body.address,
-                spImage: req.body.photo,
-                accountNo: req.body.bank_account_no,
-                ifscCode: req.body.ifsc_code,
-                bankChequeImage: req.body.bank_cheque,
-                bankName: req.body.bank_name,
-                spIdPhoto: req.body.photo_id,
-                mobileNo: req.body.mobile_no,
-                kycType: req.body.kyc_type,
-                kycStatus: req.body.kyc_status,
-                spNo: req.body.awsm_code,
-                beneName: req.body.beneficiary_name
-            }
+            // const apiUrl = 'https://arteriacp.apimanagement.ap1.hana.ondemand.com/crazibrain/ss/v1/spkyc/AGGRBRIT'
+            // const postData = {
+            //     name: req.body.awsm_name,
+            //     address1: req.body.address,
+            //     spImage: req.body.photo,
+            //     accountNo: req.body.bank_account_no,
+            //     ifscCode: req.body.ifsc_code,
+            //     bankChequeImage: req.body.bank_cheque,
+            //     bankName: req.body.bank_name,
+            //     spIdPhoto: req.body.photo_id,
+            //     mobileNo: req.body.mobile_no,
+            //     kycType: req.body.kyc_type,
+            //     kycStatus: req.body.kyc_status,
+            //     spNo: req.body.awsm_code,
+            //     beneName: req.body.beneficiary_name
+            // }
 
-            const username = 'P006026';
-            const password = 'Arteria@2020';
-            const basicAuth = 'Basic ' + btoa(username + ':' + password);
-            const headers = {
-                'Authorization': basicAuth,
-                'Custom-Header': 'header-value',
-                'apikey': 'W4jgqCFydIb7AcOrRhEiD0krcuGuobsz'
-            };
+            // const username = 'P006026';
+            // const password = 'Arteria@2020';
+            // const basicAuth = 'Basic ' + btoa(username + ':' + password);
+            // const headers = {
+            //     'Authorization': basicAuth,
+            //     'Custom-Header': 'header-value',
+            //     'apikey': 'W4jgqCFydIb7AcOrRhEiD0krcuGuobsz'
+            // };
 
 
-            const response = await axios.post(apiUrl, postData, { headers });
-            let data = {
-                request: postData,
-                url: apiUrl,
-                response: response.data,
-                status: 200,
-                flag: 1,
-                count: 0
-            }
+            // const response = await axios.post(apiUrl, postData, { headers });
+            // let data = {
+            //     request: postData,
+            //     url: apiUrl,
+            //     response: response.data,
+            //     status: 200,
+            //     flag: 1,
+            //     count: 0
+            // }
 
             if (req.body.kyc_type === 'FRESH') {
                 let currentDate = new Date();

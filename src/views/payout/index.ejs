@@ -92,19 +92,19 @@
                                 <div class="row">
                                     <div class="col-2">
                                         <label for="Mobile" class="mr-sm-2">SO Name</label>
-                                        <input type="tel" maxlength="10" class="form-control" id="mobile_no"
-                                            placeholder="SO Name" name="so_name" value="<%=QueryData.so_name %>">
+                                        <input type="tel" maxlength="10" class="form-control" id="name"
+                                            placeholder="SO Name" name="name" value="<%=QueryData.name %>">
                                     </div>
                                     <div class="col-2">
                                         <label for="dsr_code" class="mr-sm-2">DSR Code </label>
                                         <input type="text" class="form-control" id="awsm_code" placeholder="DSR Code"
                                             name="dsr_code" value="<%=QueryData.dsr_code %>">
                                     </div>
-                                    <!-- <div class="col-2">
+                                    <div class="col-2">
                                         <label for="salesman_name" class="mr-sm-2">DSR Name </label>
                                         <input type="text" class="form-control" id="awsm_name" placeholder="DSR Name"
                                             name="salesman_name" value="<%=QueryData.salesman_name %>">
-                                    </div> -->
+                                    </div>
 
 
                                     <div class="col-2">
@@ -118,9 +118,9 @@
 
                                     <div class="col-2">
                                         <label for="AW-NAME" class="mr-sm-2">Distributor Code </label>
-                                        <input type="text" class="form-control" id="aw_name"
-                                            placeholder="Distributor Code" name="distributor_code"
-                                            value="<%=QueryData.distributor_code %>">
+                                        <input type="text" class="form-control" id="aw_code"
+                                            placeholder="Distributor Code" name="aw_code"
+                                            value="<%=QueryData.aw_code %>">
 
                                     </div>
 
@@ -131,8 +131,8 @@
                                         <label for="ASE-CODE" class="mr-sm-2">Salary Payout </label>
 
                                         <input type="text" class="form-control" id="ase_code"
-                                            placeholder="Salary Payout" name="salary_payout"
-                                            value="<%=QueryData.salary_payout %>">
+                                            placeholder="Salary Payout" name="SalaryPayout"
+                                            value="<%=QueryData.SalaryPayout %>">
 
                                     </div>
 
@@ -184,6 +184,7 @@
                                         <tr>
                                             <th class="tabel-width">SO Name </th>
                                             <th class="tabel-width">DSR Code </th>
+                                            <th class="tabel-width">DSR Name </th>
                                             <th class="tabel-width">Distributor NAME</th>
                                             <th class="tabel-width">Distributor Code </th>
                                             <th class="tabel-width">Salary Payout </th>
@@ -197,22 +198,25 @@
                                         <% payout.forEach((data)=> {%>
                                             <tr>
                                                 <td>
-                                                    <%= data.so_name %>
+                                                    <%= data.name %>
                                                 </td>
                                                 <td>
-                                                    <%= data.dsr_code %>
+                                                    <%= data.dsrcode %>
                                                 </td>
                                                 <td>
-                                                    <%= data.distributor_name %>
+                                                    <%= data.awsm_name %>
                                                 </td>
                                                 <td>
-                                                    <%= data.distributor_code %>
+                                                    <%= data.aw_name %>
                                                 </td>
                                                 <td>
-                                                    <%= data.salary_payout %>
+                                                    <%= data.aw_code %>
                                                 </td>
                                                 <td>
-                                                    <%= data.incentive_payout %>
+                                                    <%= data.SalaryPayout %>
+                                                </td>
+                                                <td>
+                                                    <%= data.IncentivePayout %>
                                                 </td>
                                                 <td>
                                                     <%= data.payout_month %>
@@ -291,6 +295,7 @@
             const headers = [
                 "SO Name",
                 "DSR Code",
+                "DSR Name",
                 "Distributor NAME",
                 "Distributor Code",
                 "Salary Payout",
@@ -299,13 +304,13 @@
             ]
 
             const flattenData = data.map(item => ({
-                "SO Name": item.so_name,
-                "DSR Code": item.dsr_code,
-                "Distributor NAME": item.distributor_name,
-                "Distributor Code": item.distributor_code,
-                "Salary Payout": item.salary_payout,
-                "Incentive Payout": item.incentive_payout,
-                "Payout Month": item.payout_month
+                "SO Name": item.name,
+                "DSR Code": item.dsrcode,
+                "DSR Name": item.awsm_name,
+                "Distributor NAME": item.aw_name,
+                "Distributor Code": item.aw_code,
+                "Salary Payout": item.SalaryPayout,
+                "Incentive Payout": item.IncentivePayout,
             }));
             const replacer = (key, value) => (value === null ? "" : value);
             const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
@@ -318,17 +323,11 @@
 
         document.getElementById("btnExport")
             .addEventListener("click", function () {
+                debugger;
                 var filename = "payout.csv";
-                var mobile_no = document.getElementById("mobile_no").value;
+                var name = document.getElementById("name").value;
                 var awsm_code = document.getElementById("awsm_code").value;
-                // var awsm_name = document.getElementById("awsm_name").value;
-                var aw_code = document.getElementById("aw_code").value;
-                var aw_name = document.getElementById("aw_name").value;
-                var ase_code = document.getElementById("ase_code").value;
-                var ase_name = document.getElementById("ase_name").value;
-                var fromDate = document.getElementById("fromDate").value;
-                var toDate = document.getElementById("toDate").value;
-                fnExcelReport(filename, mobile_no, awsm_code, aw_code, aw_name, ase_code, ase_name, fromDate, toDate);
+                fnExcelReport(filename, name, awsm_code,);
             }, false);
     </script>
 

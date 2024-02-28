@@ -1,5 +1,5 @@
-const { totalEntries, selectDataWhitelisting, getTotalCount, updateIsActiveStatus, awsmDetailsHistory, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, } = require("../../models/data-whitelisting.model");
-const { retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting, updateKYCDetailHistory } = require("../../models/retailerwhitelisting.model");
+
+const { totalEntries, selectDataWhitelisting, getTotalCount, updateIsActiveStatus, awsmDetailsHistory, selectAWSMDetail, updateAWSMDetailHistory, updateAWSMDetail, selectKYCDetail, update_kyc_details, updateAWSMKycAuthenticationDetails, retailer, insertIntoFileProcessretailerwhitelisting, getUploadRecords, exportWhitelisting, updateKYCDetailHistory } = require("../../models/retailerwhitelisting.model");
 const fs = require('fs');
 const json2csv = require('json2csv').parse;
 const moment = require('moment');

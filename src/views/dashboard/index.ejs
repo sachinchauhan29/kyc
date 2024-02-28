@@ -195,16 +195,20 @@
 
                   </select>
                 </div>
-                <div class="col-4">
-                  <label for="SO" class="mr-sm-2">SO </label>
+                <div class="col-3">
+                  <label for="SO" class="mr-sm-2">SO NAME</label>
                   <input type="text" class="form-control" id="SO" placeholder="SO NAME" name="SO" value="" />
                 </div>
-                <div class="col-4">
+                <div class="col-3">
+                  <label for="SO" class="mr-sm-2">ASM NAME</label>
+                  <input type="text" class="form-control" id="SO" placeholder="ASM NAME" name="SO" value="" />
+                </div>
+                <div class="col-3">
                   <label for="fromDate" class="mr-sm-2">FROM</label>
                   <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
                     value="<%=QueryData.fromDate %>" />
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <label for="toDate" class="mr-sm-2">TO</label>
                   <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
                     value="<%=QueryData.toDate %>" />
@@ -329,12 +333,98 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-6">
       <div class="card mt-3">
         <div class="card-header-tab card-header-tab-animation card-header">
           <div class="row">
             <div class="col-lg-8 col-md-8 col-12">
-              <h6><b>DSR attendance report</b></h6>
+              <h6><b>DSR attendance report</b><b> Absent & Present</b></h6>
+            </div>
+            <div class="col-lg-4 col-lg-4 col-12 text-right">
+              <button class="btn-shadow btn btn-primary custom-btn btn-lg" data-toggle="collapse"
+                data-target="#Present">
+                <i class="fas fa-filter mr-2"></i>Filter
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div id="Present" class="collapse">
+            <form action="">
+              <div class="row">
+                <div class="col-4">
+                  <label for="selectedRegion" class="mr-sm-2">Select Region</label>
+                  <select class="form-control" id="selectedRegion">
+                    <option value="Region">Region</option>
+                    <option value="Region">North</option>
+                    <option value="Region">EAST</option>
+                    <option value="Region">WEST</option>
+                    <option value="Region">SOUTH</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="selectedMonth" class="mr-sm-2">Select Month</label>
+                  <select class="form-control" id="selectedMonth">
+                    <option value="">Choose</option>
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label for="SO" class="mr-sm-2">SO NAME</label>
+                  <input type="text" class="form-control" id="SO" placeholder="SO NAME" name="SO" value="" />
+                </div>
+                <div class="col-4">
+                  <label for="SO" class="mr-sm-2">ASM NAME</label>
+                  <input type="text" class="form-control" id="SO" placeholder="ASM NAME" name="SO" value="" />
+                </div>
+                <div class="col-4">
+                  <label for="FROM" class="mr-sm-2">FROM</label>
+
+                  <input type="date" class="form-control" id="fromDate" placeholder="fromDate" name="fromDate"
+                    value="<%=QueryData.fromDate %>" />
+                </div>
+                <div class="col-4">
+                  <label for="TO" class="mr-sm-2">TO</label>
+
+                  <input type="date" class="form-control" id="toDate" placeholder="toDate" name="toDate"
+                    value="<%=QueryData.toDate %>" />
+                </div>
+
+                <div class="col-12 mb-3">
+                  <a href="./dashboard" class="btn btn-outline-alternate custom-button reset-anchor mr-3 mt-3">Reset</a>
+                  <button type="submit" class="btn-shadow btn btn-primary custom-btn btn-lg mt-3">
+                    Apply
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <button onclick="downloadPDF()">Download as PDF</button>
+        <div class="row">
+          <div class="col-12 mx-auto d-flex justify-content-center">
+            <canvas id="Presentchart" width="200px" height="80px"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card mt-3">
+        <div class="card-header-tab card-header-tab-animation card-header">
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-12">
+              <h6><b>Absent reasons</b></h6>
             </div>
 
             <div class="col-lg-4 col-lg-4 col-12 text-right">
@@ -404,8 +494,75 @@
   </div>
 
   <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Include Chart.js and jspdf libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
+  <script>
+    // Function to download chart data as Excel
+    function downloadExcel() {
+      const wb = XLSX.utils.book_new();
+      const wsData = [
+        ["Labels", "Data"],
+        ["Active", 100],
+        ["Inactive", 50]
+      ];
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      XLSX.utils.book_append_sheet(wb, ws, "Chart Data");
+      XLSX.writeFile(wb, "chart.xlsx");
+    }
 
+  </script>
+
+  <script>
+    // Chart data
+    const data = {
+      labels: ["Active", "Inactive"],
+      datasets: [{
+        label: "KYC INFO",
+        data: [100, 50],
+        backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+        hoverOffset: 4,
+      }],
+    };
+
+    // Chart configuration
+    const configuration = {
+      type: 'pie',
+      data: data,
+      options: {
+        plugins: {
+          legend: {
+            display: true,
+            align: "start",
+            labels: {
+              font: { size: 14 },
+              padding: 10,
+            },
+          },
+          datalabels: {
+            color: "black",
+            font: { weight: "bold" },
+          },
+        },
+      },
+    };
+
+    // Get canvas element
+    const canvas = document.getElementById("Presentchart");
+
+    // Create chart on canvas
+    const ctx = canvas.getContext("2d");
+    new Chart(ctx, configuration);
+
+    // Function to download chart as PDF
+    function downloadPDF() {
+      const pdf = new jsPDF(); // <-- This line is where the error is occurring
+      const imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 10, 10);
+      pdf.save('chart.pdf');
+    }
+  </script>
 
   <script>
     (async function () {

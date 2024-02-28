@@ -340,15 +340,20 @@
                                 <thead>
                                     <tr>
                                         <th class="tabel-width">Region</th>
-                                        <th class="tabel-width">RSM</th>
-                                        <th class="tabel-width">ASM Area Code</th>
-                                        <th class="tabel-width">sales officer</th>
-                                        <th class="tabel-width">Distributor Code</th>
+                                        <th class="tabel-width">ASM Email id</th>
+                                        <th class="tabel-width">ASM Name</th>
+                                        <th class="tabel-width">ASM Code</th>
+                                        <th class="tabel-width">SO Name</th>
+                                        <th class="tabel-width">SO Email id </th>
+                                        <th class="tabel-width">SO Code</th>
                                         <th class="tabel-width">Distributor Name</th>
-                                        <th class="tabel-width">RetailerCode</th>
-                                        <th class="tabel-width">RetailerName</th>
-                                        <th class="tabel-width">SalesMan Code</th>
+                                        <th class="tabel-width">Distributor Code</th>
+                                        <th class="tabel-width">Retailer Name</th>
+                                        <th class="tabel-width">Retailer Code</th>
+                                        <th class="tabel-width">Retailer State</th>
+                                        <th class="tabel-width">Retailer City</th>
                                         <th class="tabel-width">SalesMan Name</th>
+                                        <th class="tabel-width">SalesMan Code</th>
                                         <th class="tabel-width">SalesMan Emp Code</th>
 
                                     </tr>
@@ -358,40 +363,51 @@
                                     <% retailerDataQuery.forEach((data)=> { %>
                                         <tr>
                                             <td>
-                                                <%= data.Region %>
+                                                <%= data.region %>
                                             </td>
-                                            <td>
-                                                <%= data.RSM %>
-                                            </td>
+                                            <td>ASM Email id</td>
+                                            <td>ASM Name</td>
                                             <td>
                                                 <%= data.ASMAreaCode%>
                                             </td>
                                             <td>
-                                                <%= data.SO%>
+                                                <%= data.ase_name%>
                                             </td>
                                             <td>
-                                                <%= data.DistributorCode%>
+                                                <%= data.ase_email_id%>
                                             </td>
                                             <td>
-                                                <%= data.DistributorName%>
+                                                <%= data.ase_employee_code%>
                                             </td>
                                             <td>
-                                                <%= data.RetailerCode%>
+                                                <%= data.name%>
                                             </td>
                                             <td>
-                                                <%= data.RetailerName%>
+                                                <%= data.distributorcode%>
                                             </td>
                                             <td>
-                                                <%= data.SalesManCode%>
+                                                <%= data.retailername%>
                                             </td>
                                             <td>
-                                                <%= data.SalesManName%>
+                                                <%= data.retailercode%>
                                             </td>
                                             <td>
-                                                <%= data.SalesManEmpCode%>
+                                                <%= data.state%>
                                             </td>
+                                            <td>
+                                                <%= data.city%>
+                                            </td>
+                                            <td>
+                                                <%= data.awsm_name%>
+                                            </td>
+                                            <td>
+                                                <%= data.awsm_code%>
+                                            </td>
+                                            <td>SalesMan Emp Code</td>
+
                                         </tr>
                                         <%})%>
+
 
                                 </tbody>
 

@@ -17,16 +17,14 @@ const dbCon = require('../config/db');
 //   });
 // }
 const insertDataINKYCReportBase = async (data) => {
-  let insertQuery = `INSERT INTO uploadpayout (so_name, dsr_code, distributor_name, distributor_code, salary_payout, incentive_payout, payout_month) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+  let insertQuery = `INSERT INTO Retailerpayout_list (name, dsrcode, SalaryPayout, IncentivePayout) VALUES (?, ?, ?, ? )`;
 
+  console.log(insertQuery);
   let insertValues = [
-    data.so_name,
-    data.dsr_code,
-    data.distributor_name,
-    data.distributor_code,
-    data.salary_payout,
-    data.incentive_payout,
-    data.payout_month
+    data.name,
+    data.dsrcode,
+    data.SalaryPayout,
+    data.IncentivePayout
   ];
 
   return new Promise((resolve, reject) => {
@@ -77,35 +75,41 @@ const insertThirdPartyAPILog = async (data) => {
 
 
 const selectKYCReportBase = async (data) => {
-  let query = 'SELECT  * FROM uploadpayout  where 1 = 1';
+  let query = `SELECT Retailerpayout_list.*, awsm_details.* ,aw_details.*
+  FROM Retailerpayout_list 
+  INNER JOIN awsm_details ON awsm_details.awsm_code = Retailerpayout_list.dsrcode
+  INNER JOIN aw_details ON aw_details.email = Retailerpayout_list.aseemailid 
+  WHERE 1=1`;
 
-  if (data.so_name) {
-    query += ` AND uploadpayout.so_name = '${data.so_name}'`;
+  // let query = 'SELECT  * FROM Retailerpayout_list  where 1 = 1';
+
+  if (data.name) {
+    query += ` AND Retailerpayout_list.name = '${data.name}'`;
   }
   if (data.dsr_code) {
-    query += ` AND uploadpayout.dsr_code = '${data.dsr_code}'`;
+    query += ` AND Retailerpayout_list.dsr_code = '${data.dsr_code}'`;
   }
   if (data.salesman_name) {
-    query += ` AND uploadpayout.distributor_name = '${data.salesman_name}'`;
+    query += ` AND Retailerpayout_list.distributor_name = '${data.salesman_name}'`;
   }
-  if (data.aw_name) {
-    query += ` AND uploadpayout.distributor_code = '${data.aw_name}'`;
+  if (data.aw_code) {
+    query += ` AND aw_details.aw_code = '${data.aw_code}'`;
   }
-  if (data.ase_code) {
-    query += ` AND uploadpayout.salary_payout = '${data.ase_code}'`;
+  if (data.SalaryPayout) {
+    query += ` AND Retailerpayout_list.SalaryPayout = '${data.SalaryPayout}'`;
   }
   if (data.ase_name) {
-    query += ` AND uploadpayout.incentive_payout = '${data.ase_name}'`;
+    query += ` AND Retailerpayout_list.incentive_payout = '${data.ase_name}'`;
   }
   if (data.state) {
     query += ` AND awsm_details.payout_month = '${data.state}'`;
   }
   if (data.fromDate && data.toDate) {
-    query += ` AND DATE(uploadpayout.created_on) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
+    query += ` AND DATE(Retailerpayout_list.created_date) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
   }
 
 
-  query += ' ORDER BY uploadpayout.created_on DESC LIMIT ? OFFSET ?';
+  // query += ' ORDER BY Retailerpayout_list.created_date DESC LIMIT ? OFFSET ?';
 
   const page = parseInt(data.page) || 1;
   const pageSize = 10;
@@ -123,34 +127,34 @@ const selectKYCReportBase = async (data) => {
 
 
 const payoutExport = async (data) => {
-  let query = 'SELECT  * FROM uploadpayout  where 1 = 1';
+  let query = 'SELECT  * FROM Retailerpayout_list  where 1 = 1';
 
   if (data.so_name) {
-    query += ` AND uploadpayout.so_name = '${data.so_name}'`;
+    query += ` AND Retailerpayout_list.so_name = '${data.so_name}'`;
   }
   if (data.dsr_code) {
-    query += ` AND uploadpayout.dsr_code = '${data.dsr_code}'`;
+    query += ` AND Retailerpayout_list.dsr_code = '${data.dsr_code}'`;
   }
   if (data.salesman_name) {
-    query += ` AND uploadpayout.distributor_name = '${data.salesman_name}'`;
+    query += ` AND Retailerpayout_list.distributor_name = '${data.salesman_name}'`;
   }
   if (data.aw_name) {
-    query += ` AND uploadpayout.distributor_code = '${data.aw_name}'`;
+    query += ` AND Retailerpayout_list.distributor_code = '${data.aw_name}'`;
   }
   if (data.ase_code) {
-    query += ` AND uploadpayout.salary_payout = '${data.ase_code}'`;
+    query += ` AND Retailerpayout_list.salary_payout = '${data.ase_code}'`;
   }
   if (data.ase_name) {
-    query += ` AND uploadpayout.incentive_payout = '${data.ase_name}'`;
+    query += ` AND Retailerpayout_list.incentive_payout = '${data.ase_name}'`;
   }
   if (data.state) {
     query += ` AND awsm_details.payout_month = '${data.state}'`;
   }
   if (data.fromDate && data.toDate) {
-    query += ` AND DATE(uploadpayout.created_on) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
+    query += ` AND DATE(Retailerpayout_list.created_date) BETWEEN STR_TO_DATE('${data.fromDate}', '%Y-%m-%d') AND STR_TO_DATE('${data.toDate}', '%Y-%m-%d')`;
   }
 
-  query += ` ORDER BY uploadpayout.created_on DESC`;
+  query += ` ORDER BY Retailerpayout_list.created_date DESC`;
 
   const limit = parseInt(1000000000);
   if (!isNaN(limit) && limit > 0) {
@@ -171,7 +175,7 @@ const payoutExport = async (data) => {
 const getTotalCount = () => {
   let countQuery = `
     SELECT COUNT(*) as total
-    FROM uploadpayout WHERE 1 = 1
+    FROM Retailerpayout_list WHERE 1 = 1
   `;
 
   return new Promise((resolve, reject) => {

@@ -134,13 +134,15 @@
                                                 placeholder="salesman_type" value="<%=QueryData.salesman_type %>">
 
                                                 <option value=""> dsr type </option>
-                                                <option value="Awsm" <%=QueryData.salesman_type==='Awsm' ? 'selected'
-                                                    : '' %>>DSR</option>
-                                                <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
-                                                    %>>SDA</option>
-                                                <option value="Psm" <%=QueryData.salesman_type==='Psm' ? 'selected' : ''
-                                                    %>>PSM</option>>
+                                                <option value="PRE_SELLER" <%=QueryData.salesman_type==='PRE_SELLER'
+                                                    ? 'selected' : '' %>>PRE_SELLER</option>
+                                                <option value="ISR" <%=QueryData.salesman_type==='ISR' ? 'selected' : ''
+                                                    %>>ISR</option>
+                                                <option value="PROMOTER" <%=QueryData.salesman_type==='PROMOTER'
+                                                    ? 'selected' : '' %>>PROMOTER</option>>
 
+                                                <option value="MERCHANDISER" <%=QueryData.salesman_type==='MERCHANDISER'
+                                                    ? 'selected' : '' %>>MERCHANDISER</option>>
                                             </select>
 
                                         </div>
@@ -444,27 +446,30 @@
                                         <li style="padding: 17px 18px 18px 17px;width: 162px;"
                                             class="header-contents-new">DOB</li>
 
-
-                                        <li style="padding: 17px 6px 6px 17px;width: 162px; font-size: 10px;"
+                                        <li style="padding: 17px 18px 18px 17px;width: 162px;"
+                                            class="header-contents-new">
+                                            KYC METHOD</li>
+                                        <li style="padding: 17px 6px 14px  17px;width: 162px; font-size: 10px;"
                                             class="header-contents-new">VALIDATION CALLING ATTEMPT</li>
-                                        <li style="padding: 17px 8px 12px 17px;width: 162px; font-size: 10px;"
+                                        <li style="padding: 17px 8px 17px 17px;width: 162px; font-size: 10px;"
                                             class="header-contents-new">VALIDATION CALLING STATUS</li>
-                                        <li style="padding: 17px 20px 14px 17px; width: 162px;"
+                                        <li style="padding:28px 20px 27px 17px; width: 162px;"
                                             class="header-contents-new">VALIDATION CALLING REMARK</li>
 
 
-                                        <li style="padding: 35px 20px 35px 17px; width: 162px;"
+                                        <li style="padding: 18px 22px 18px 17px; width: 162px;"
                                             class="header-contents-new">CHANNEL TYPE</li>
 
 
-                                        <li style="padding:17px 20px 20px 17px;width: 162px;"
+                                        <li style="padding:26px 20px 24px 17px;width: 162px;"
                                             class="header-contents-new">KYC STATUS</li>
-                                        <li style="padding: 17px 18px 18px 17px; width: 162px; "
+                                        <li style="padding: 30px 18px 30px 17px; width: 162px; "
                                             class="header-contents-new">KYC REJECTION REASON</li>
-                                        <li style="padding: 37px 24px 36px 17px; width: 162px;"
-                                            class="header-contents-new">REMARKS</li>
                                         <li style="padding: 17px 17px 17px 17px; width: 162px;"
                                             class="header-contents-new">Date of Joining</li>
+                                        <li style="padding: 16px 24px 20px 17px; width: 162px;"
+                                            class="header-contents-new">REMARKS</li>
+
                                     </ul>
                                 </div>
 

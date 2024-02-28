@@ -176,7 +176,7 @@
 
                                     </div>
 
-                                    <div class="col-2">
+                                    <!-- <div class="col-2">
 
                                         <div class="ms-auto">
 
@@ -197,7 +197,7 @@
 
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                     <div class="col-2">
 
@@ -220,7 +220,7 @@
 
 
 
-                                    <div class="col-2 mt-2">
+                                    <div class="col-2 ">
 
                                         <label for="ASE-CODE" class="mr-sm-2">SO CODE</label>
 
@@ -502,23 +502,28 @@
                                             class="header-contents-new">DOB</li>
 
 
-                                        <li style="padding: 17px 6px 6px 17px;width: 162px; font-size: 10px;"
+                                        <li style="padding: 17px 18px 18px 17px;width: 162px;"
+                                            class="header-contents-new">
+                                            KYC METHOD</li>
+                                        <li style="padding: 17px 6px 14px  17px;width: 162px; font-size: 10px;"
                                             class="header-contents-new">VALIDATION CALLING ATTEMPT</li>
-                                        <li style="padding: 17px 8px 8px 17px;width: 162px; font-size: 10px;"
+                                        <li style="padding: 17px 8px 17px 17px;width: 162px; font-size: 10px;"
                                             class="header-contents-new">VALIDATION CALLING STATUS</li>
-                                        <li style="padding: 17px 20px 14px 17px; width: 162px;"
+                                        <li style="padding:28px 20px 27px 17px; width: 162px;"
                                             class="header-contents-new">VALIDATION CALLING REMARK</li>
 
 
-                                        <li style="padding: 35px 20px 35px 17px; width: 162px;"
+                                        <li style="padding: 18px 22px 18px 17px; width: 162px;"
                                             class="header-contents-new">CHANNEL TYPE</li>
 
 
-                                        <li style="padding:17px 20px 20px 17px;width: 162px;"
+                                        <li style="padding:26px 20px 24px 17px;width: 162px;"
                                             class="header-contents-new">KYC STATUS</li>
-                                        <li style="padding: 17px 18px 18px 17px; width: 162px; "
+                                        <li style="padding: 30px 18px 30px 17px; width: 162px; "
                                             class="header-contents-new">KYC REJECTION REASON</li>
-                                        <li style="padding: 37px 24px 36px 17px; width: 162px;"
+                                        <li style="padding: 17px 17px 17px 17px; width: 162px;"
+                                            class="header-contents-new">Date of Joining</li>
+                                        <li style="padding: 16px 24px 20px 17px; width: 162px;"
                                             class="header-contents-new">REMARKS</li>
 
                                     </ul>
@@ -568,8 +573,8 @@
                                                         readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name="awsm_name"
-                                                        class="form-control" value="<%= kyc.awsm_name %>" readonly="">
+                                                    class="header-contents-new"><input type="text" name="created_by"
+                                                        class="form-control" value="<%= kyc.created_by %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name="aw_code"
@@ -585,13 +590,13 @@
                                                         value="<%= kyc.beneficiary_name %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name="awsm_state"
-                                                        class="form-control" value="<%= kyc.awsm_state %>" readonly="">
+                                                    class="header-contents-new"><input type="text" name="state"
+                                                        class="form-control" value="<%= kyc.state %>" readonly="">
                                                 </li>
 
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new"><input type="text" name="awsm_city"
-                                                        class="form-control" value="<%= kyc.awsm_city %>" readonly="">
+                                                    class="header-contents-new"><input type="text" name="city"
+                                                        class="form-control" value="<%= kyc.city %>" readonly="">
                                                 </li>
 
                                                 <li style="width: 162px;padding: 7px 16px 9px 16px;"
@@ -737,7 +742,7 @@
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
-                                                        class="form-control" value="<%= kyc.channel %>" readonly="">
+                                                        class="form-control" value="<%= kyc.SellerType %>" readonly="">
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 1kyc_status6px"
                                                     class="header-contents-new"> <select name="kyc_status" required
@@ -788,6 +793,12 @@
 
                                                         </select>
                                                     </div>
+                                                </li>
+                                                <li style="width: 162px;padding: 7px 16px 7px 16px"
+                                                    class="header-contents-new">
+                                                    <input type="text" name="JoiningDate" class="form-control"
+                                                        value="<%= kyc.JoiningDate ? new Date(kyc.JoiningDate).toLocaleDateString('en-IN') : '' %>"
+                                                        readonly>
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text"
@@ -852,9 +863,9 @@
     </script>
 
     <script>
-        function fnExcelReport(file, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city) {
+        function fnExcelReport(file, mobile_no, awsm_code, awsm_name, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city) {
 
-            fetch(`/retailer/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&salesman_type=${salesman_type}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`)
+            fetch(`/retailer/export?mobile_no=${mobile_no}&awsm_code=${awsm_code}&awsm_name=${awsm_name}&aw_code=${aw_code}&aw_name=${aw_name}&ase_code=${ase_code}&ase_name=${ase_name}&fromDate=${fromDate}&toDate=${toDate}&awsm_state=${awsm_state}&awsm_city=${awsm_city}`)
                 .then((res) => res.json())
                 .then((data) => {
                     data.forEach((item) => {
@@ -899,8 +910,8 @@
                 "SO EMAIL ID",
                 "SO CODE",
                 "SO NAME",
-                "DSR ID",
-                "DSR NAME",
+                "RETAILER ID",
+                "RETAILER NAME",
                 "Distributor ID",
                 "Distributor NAME",
                 "BENEFICIARY NAME",
@@ -933,15 +944,17 @@
                 "SO EMAIL ID": item.ase_email_id,
                 "SO CODE": item.ase_employee_code,
                 "SO NAME": item.ase_name,
-                "DSR ID": item.awsm_code,
-                "DSR NAME": item.awsm_name,
+                "RETAILER ID": item.RetailerCode,
+                "RETAILER NAME": item.created_by,
                 "Distributor ID": item.aw_code,
                 "Distributor NAME": item.aw_name,
                 "BENEFICIARY NAME": item.beneficiary_name,
-                "STATE NAME": item.awsm_state,
-                "CITY NAME": item.awsm_city,
+                "STATE NAME": item.aw_state,
+                "CITY NAME": item.aw_city,
                 "ADDRESS": item.address,
-                "SALESMAN PHOTO": item.photo,
+                "DSR PHOTO": item.photo,
+                "PAN CARD": item.pancard_image,
+                "PAN CARD NO.": item.pancard_no,
                 "BANK A/C NO.": item.bank_account_no,
                 "IFSC CODE": item.ifsc_code,
                 "CHEQUE IMAGE": item.bank_cheque,
@@ -954,11 +967,12 @@
                 "VALIDATION CALLING ATTEMPT": item.calling_count,
                 "VALIDATION CALLING STATUS": item.calling_status,
                 "VALIDATION CALLING REMARK": item.calling_remarks,
+                "CHANNEL TYPE": item.SellerType,
                 "KYC STATUS": item.status,
                 "KYC REJECTION REASON": item.kyc_rejection_reason,
-                "REMARKS": item.wip_remakrs
+                "REMARKS": item.approved_comment
             }));
-
+            // console.log(data);
             const replacer = (key, value) => (value === null ? "" : value);
             const csvContent = [headers.join(","), ...flattenData.map(row => headers.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(","))].join("\r\n");
             return csvContent;
@@ -978,7 +992,7 @@
                 var mobile_no = document.getElementById("mobile_no").value;
                 var awsm_code = document.getElementById("awsm_code").value;
                 var awsm_name = document.getElementById("awsm_name").value;
-                var salesman_type = document.getElementById("salesman_type").value;
+                // var salesman_type = document.getElementById("salesman_type").value;
                 var aw_code = document.getElementById("aw_code").value;
                 var aw_name = document.getElementById("aw_name").value;
                 var ase_code = document.getElementById("ase_code").value;
@@ -987,7 +1001,7 @@
                 var toDate = document.getElementById("toDate").value;
                 var awsm_state = document.getElementById("awsm_state").value;
                 var awsm_city = document.getElementById("awsm_city").value;
-                fnExcelReport(filename, mobile_no, awsm_code, awsm_name, salesman_type, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city);
+                fnExcelReport(filename, mobile_no, awsm_code, awsm_name, aw_code, aw_name, ase_code, ase_name, fromDate, toDate, awsm_state, awsm_city);
             }, false);
     </script>
 

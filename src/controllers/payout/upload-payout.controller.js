@@ -26,13 +26,14 @@ const uploadPayoutFile = async (req, res) => {
     // Use map to create an array of promises
     const promiseArray = data.map(async (element) => {
       let excelObject = {
-        so_name: element[0],
-        dsr_code: element[2],
-        distributor_name: element[1],
-        salary_payout: element[4],
-        distributor_code: element[3],
-        payout_month: element[6],
-        incentive_payout: element[5],
+        name: element[0],
+        dsrcode: element[1],
+        dsrname: element[2],
+        distributor_name: element[3],
+        distributor_code: element[4],
+        SalaryPayout: element[5],
+        IncentivePayout: element[6],
+        payout_month: element[7],
       }
       let dbResult = await insertDataINKYCReportBase(excelObject);
       console.log(dbResult);
@@ -79,12 +80,12 @@ const uploadPayoutFile = async (req, res) => {
     Promise.all(promiseArray)
       .then(async () => {
         const fields = [
-          { label: "SO NAME", value: 'so_name' },
-          { label: 'DSR CODE', value: 'dsr_code' },
+          { label: "SO NAME", value: 'name' },
+          { label: 'DSR CODE', value: 'dsrcode' },
           { label: 'DISTRIBUTOR Name', value: "distributor_name" },
           { label: 'DISTRIBUTOR CODE', value: 'distributor_code' },
-          { label: 'Salary Payout', value: 'salary_payout' },
-          { label: 'Incentive Payout', value: 'incentive_payout' },
+          { label: 'Salary Payout', value: 'SalaryPayout' },
+          { label: 'Incentive Payout', value: 'IncentivePayout' },
           { label: 'Payout Month', value: 'payout_month' },
         ];
         const csv = json2csv(excelArray, { fields });

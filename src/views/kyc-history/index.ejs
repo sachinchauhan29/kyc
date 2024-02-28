@@ -64,10 +64,10 @@
                                     </a>
                                     <a class="mt-2" href="./kyc-history">
                                         <img src="./images/on.png" alt="">
-                                        DSR History</a>
+                                        DSR KYC History</a>
                                     <a class="mt-2" href="./retailer-history">
                                         <img src="./images/off.png" alt="">
-                                        RETAILER History
+                                        RETAILER KYC History
                                     </a>
                                     <a class="mt-2" href="./master-data">
                                         <img src="./images/off.png" alt="">
@@ -146,14 +146,16 @@
                                             <select name="salesman_type" class="form-control" id="salesman_type"
                                                 placeholder="salesman_type" value="<%=QueryData.salesman_type %>">
 
-                                                <option value=""> DSR Type </option>
-                                                <option value="Awsm" <%=QueryData.salesman_type==='Awsm' ? 'selected'
-                                                    : '' %>>DSR</option>
-                                                <option value="Sda" <%=QueryData.salesman_type==='Sda' ? 'selected' : ''
-                                                    %>>SDA</option>
-                                                <option value="Psm" <%=QueryData.salesman_type==='Psm' ? 'selected' : ''
-                                                    %>>PSM</option>>
+                                                <option value=""> dsr type </option>
+                                                <option value="PRE_SELLER" <%=QueryData.salesman_type==='PRE_SELLER'
+                                                    ? 'selected' : '' %>>PRE_SELLER</option>
+                                                <option value="ISR" <%=QueryData.salesman_type==='ISR' ? 'selected' : ''
+                                                    %>>ISR</option>
+                                                <option value="PROMOTER" <%=QueryData.salesman_type==='PROMOTER'
+                                                    ? 'selected' : '' %>>PROMOTER</option>>
 
+                                                <option value="MERCHANDISER" <%=QueryData.salesman_type==='MERCHANDISER'
+                                                    ? 'selected' : '' %>>MERCHANDISER</option>>
                                             </select>
 
                                         </div>
@@ -567,17 +569,17 @@
                                                     </div>
                                                 </li>
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
-                                                    class="header-contents-new bg-yello wtabel-img">
-                                                    <div class="tabel-img" style="width: 100px; height: 50px;">
-                                                        <a id="imageLink" href="<%= data.pancard_image %>">
-                                                            <img src="<%= data.pancard_image %>"
-                                                                alt="Description of the image" width="100" height="50"
-                                                                font-size="50px" onclick="return false;">
+                                                    class="header-contents-new tabel-img">
+                                                    <div class="tabel-img">
+                                                        <a target="_blank">
+                                                            <img width="100" height="50" src="<%= data.pancard_image %>"
+                                                                onclick="getImage(this);">
+                                                            <input type="hidden" value="<%= data.pancard_image %>"
+                                                                name="pancard_image">
                                                         </a>
-                                                        <input type="hidden" value="<%= data.pancard_image %>"
-                                                            name="pancard_image">
                                                     </div>
                                                 </li>
+
                                                 <li style="width: 162px;padding: 7px 16px 7px 16px"
                                                     class="header-contents-new"><input type="text" name=""
                                                         class="form-control" value="<%= data.pancard_no %>" readonly="">
@@ -808,15 +810,16 @@
                 "SO NAME",
                 "DSR ID",
                 "DSR NAME",
-                "Distributor ID",
-                "Distributor NAME",
+                "DSR EMAIL",
+                "DISTRIUTOR ID",
+                "DISTRIUTOR NAME",
                 "BENEFICIARY NAME",
                 "STATE NAME",
                 "CITY NAME",
                 "ADDRESS",
                 "DSR PHOTO",
                 "DSR PAN PHOTO",
-                "DSR PAN Card No.",
+                "DSR PAN CARD No.",
                 "BANK A/C NO.",
                 "IFSC CODE",
                 "CHEQUE IMAGE",
@@ -838,7 +841,7 @@
             ]
 
             function dateFun(item) {
-                console.log(item);
+                //   console.log(item);
                 switch (item.kyc_type) {
                     case 'FRESH':
                         return item.approved_on;
@@ -861,7 +864,8 @@
                 "SO NAME": item.ase_name,
                 "DSR ID": item.awsm_code,
                 "DSR NAME": item.awsm_name,
-                "DISTRIUTOR ID": item.aw_id,
+                "DSR EMAIL": 'ss',
+                "DISTRIUTOR ID": item.aw_code,
                 "DISTRIUTOR NAME": item.aw_name,
 
                 "BENEFICIARY NAME": item.beneficiary_name,
